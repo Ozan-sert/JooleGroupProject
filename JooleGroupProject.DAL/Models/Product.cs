@@ -35,7 +35,7 @@ namespace JooleGroupProject.DAL.Models
         //[Required]
         //[StringLength(100)]
         public string Series { get; set; }
-        public virtual ICollection<AttributeValue> AttributeValues { get; set; }
+        public virtual ICollection<ProductAttribute> AttributeValues { get; set; }
 
         public virtual SubCategory SubCategory { get; set; }
 

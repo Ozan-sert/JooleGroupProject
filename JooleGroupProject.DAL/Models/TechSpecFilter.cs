@@ -11,18 +11,18 @@ namespace JooleGroupProject.DAL.Models
     public class TechSpecFilter
     {
 
-        //[Key]
-        //[Column(Order = 0)]
+        [Key]
+        [Column(Order = 0)]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SubCategoryID { get; set; }
 
-        //[Key]
-        //[Column(Order = 1)]
+        [Key]
+        [Column(Order = 1)]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AttributeID { get; set; }
 
         //[Key]
-        //[Column(Order = 2)]
+        [Column(Order = 2)]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaxValue { get; set; }
 

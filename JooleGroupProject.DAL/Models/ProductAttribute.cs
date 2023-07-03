@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Models
 {
-    public class AttributeValue
+    public class ProductAttribute
     {
-        //[Key]
-        //[Column(Order = 0)]
+        [Key]
+        [Column(Order = 0)]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductID { get; set; }
 
-        //[Key]
-        //[Column(Order = 1)]
+        [Key]
+        [Column(Order = 1)]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AttributeID { get; set; }
 
         //[Key]
         //[Column("attributeValue", Order = 2)]
         //[StringLength(100)]
-        public string AttributeValue1 { get; set; }
+        public string AttributeValue { get; set; }
 
         public virtual Attribute Attribute { get; set; }
 

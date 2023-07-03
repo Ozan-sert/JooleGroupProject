@@ -28,7 +28,7 @@ namespace JooleGroupProject.DAL.Models
         public bool IsType { get; set; }
 
 
-        public virtual ICollection<AttributeValue> AttributeValues { get; set; }
+        public virtual ICollection<ProductAttribute> AttributeValues { get; set; }
 
         public virtual ICollection<TechSpecFilter> TechSpecFilters { get; set; }
     }
