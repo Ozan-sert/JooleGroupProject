@@ -55,6 +55,10 @@
     <Compile Include="Migrations\202307030345588_CreateDB.designer.cs">
       <DependentUpon>202307030345588_CreateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307040438344_AddCategory.cs" />
+    <Compile Include="Migrations\202307040438344_AddCategory.designer.cs">
+      <DependentUpon>202307040438344_AddCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202307030345588_CreateDB.resx">
       <DependentUpon>202307030345588_CreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307040438344_AddCategory.resx">
+      <DependentUpon>202307040438344_AddCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
