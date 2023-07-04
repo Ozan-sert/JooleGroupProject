@@ -11,12 +11,6 @@ namespace JooleGroupProject.DAL.Interfaces
     {
         TEntity GetByID(int id);
         TEntity Get(Expression<Func<TEntity, bool>> where);
-        void Insert(TEntity entity);
-
-        void Delete(TEntity entity);
-
-        void Update(TEntity entity);
-
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where);
     }

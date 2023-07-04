@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace JooleGroupProject.RepositoryLayer.Repositories
 {
@@ -16,16 +17,21 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         }
 
         public User GetUserByID(int id) { 
-            return this.GetByID(id); 
+            return GetByID(id); 
         }
 
         // when login ==> get the password
         public User GetUserByName(string name) {
-            return this.Get(x => x.UserName == name); 
+            return Get(x => x.UserName == name); 
         }
 
         public void AddUser(User user) {
-            this.Insert(user); 
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+            }
+
+            _dbContext.Users.Add(user);
         } 
     }
 }

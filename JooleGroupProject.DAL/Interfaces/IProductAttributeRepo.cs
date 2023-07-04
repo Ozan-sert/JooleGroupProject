@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IProductAttributeRepo:IGenericRepo<ProductAttribute>
+    public interface IProductAttributeRepo
     {
     }
 }

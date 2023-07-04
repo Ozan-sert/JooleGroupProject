@@ -34,7 +34,7 @@ namespace JooleGroupProject.ServiceLayer.Services
 
         public ProductDTO GetProductById(int id)
         {
-            var product = _unitOfWork.ProductRepo.GetByID(id);
+            var product = _unitOfWork.ProductRepo.GetProduct(id);
             if (product == null)
             {
                 return null;
@@ -42,18 +42,5 @@ namespace JooleGroupProject.ServiceLayer.Services
 
             return _mapper.Map<ProductDTO>(product);
         }
-
-        public IEnumerable<ProductDTO> GetAllProducts()
-        {
-            var products = _unitOfWork.ProductRepo.GetAll();
-            if (products == null)
-            {
-                return null;
-            }
-
-            return _mapper.Map<IEnumerable<ProductDTO>>(products);
-        }
- 
-
     }
 }

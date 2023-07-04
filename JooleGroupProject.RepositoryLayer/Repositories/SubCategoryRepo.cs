@@ -17,7 +17,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
 
         public IEnumerable<SubCategory> GetSubCategoriesByCategory(int id)
         {
-            return this.GetMany(x => x.CategoryID == id);
+            return GetMany(x => x.CategoryID == id);
         }
     }
 }

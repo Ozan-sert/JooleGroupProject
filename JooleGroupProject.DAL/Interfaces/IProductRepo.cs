@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IProductRepo : IGenericRepo<Product> 
+    public interface IProductRepo  
     {
         Product GetProduct(int id);
 

@@ -17,21 +17,21 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         }
         public Attribute GetAttribute(int id)
         {
-            return this.GetByID(id);
+            return GetByID(id);
         }
 
         public IEnumerable<Attribute> GetAttributes()
         {
-            return this.GetAll();
+            return GetAll();
         }
         
         public IEnumerable<Attribute> GetAttributesByTechSpec()
         {
-            return this.GetMany(x => x.IsTechSpec == true);
+            return GetMany(x => x.IsTechSpec == true);
         }
         public IEnumerable<Attribute> GetAttributesByType()
         {
-            return this.GetMany(x => x.IsType == true);
+            return GetMany(x => x.IsType == true);
         }
         
     }

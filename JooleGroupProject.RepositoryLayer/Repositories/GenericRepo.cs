@@ -11,7 +11,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
 {
     public class GenericRepo<TEntity> : IGenericRepo<TEntity> where TEntity : class
     {
-        private readonly MyDBContext _dbContext;
+        protected readonly MyDBContext _dbContext;
 
         public GenericRepo(MyDBContext dbContext)
         {
@@ -31,16 +31,6 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         public void Insert(TEntity entity)
         {
             _dbContext.Set<TEntity>().Add(entity);
-        }
-
-        public void Delete(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Remove(entity);
-        }
-
-        public void Update(TEntity entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
 
