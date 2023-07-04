@@ -10,7 +10,7 @@ namespace JooleGroupProject.DAL.Interfaces
     public interface IGenericRepo<TEntity> where TEntity : class
     {
         TEntity GetByID(int id);
-
+        TEntity Get(Expression<Func<TEntity, bool>> where);
         void Insert(TEntity entity);
 
         void Delete(TEntity entity);
