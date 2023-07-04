@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IUserRepo 
+    public interface IUserRepo : IGenericRepo<User>
     { 
         
 
