@@ -14,11 +14,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
 
         }
-        public Product GetProduct(int id)
-        {
-            return GetByID(id);
-
-        }
+    
 
         
 

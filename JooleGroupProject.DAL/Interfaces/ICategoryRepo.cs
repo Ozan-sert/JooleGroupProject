@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface ICategoryRepo 
+    public interface ICategoryRepo : IGenericRepo<Category>
     {
-        IEnumerable<Category> GetCategories();
-
-        Category GetCategory(int id); 
+        
     }
 }

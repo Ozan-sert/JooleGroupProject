@@ -34,7 +34,7 @@ namespace JooleGroupProject.ServiceLayer.Services
 
         public UserDTO GetUserByID(int id)
         {
-            var user = _unitOfWork.UserRepo.GetUserByID(id);
+            var user = _unitOfWork.UserRepo.GetByID(id);
             if (user == null)
             {
                 return null;

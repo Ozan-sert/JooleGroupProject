@@ -16,9 +16,6 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
 
         }
 
-        public User GetUserByID(int id) { 
-            return GetByID(id); 
-        }
 
         // when login ==> get the password
         public User GetUserByName(string name) {

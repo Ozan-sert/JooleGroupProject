@@ -9,7 +9,7 @@ namespace JooleGroupProject.DAL.Interfaces
 {
     public interface IUserRepo 
     { 
-        User GetUserByID(int id);
+        
 
         // when login ==> get the password
         User GetUserByName(string name);

@@ -28,11 +28,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
             return _dbContext.Set<TEntity>().Where(where).FirstOrDefault();
         }
 
-        public void Insert(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Add(entity);
-        }
-
+ 
 
         public IEnumerable<TEntity> GetAll()
         {

@@ -34,7 +34,7 @@ namespace JooleGroupProject.ServiceLayer.Services
 
         public ProductDTO GetProductById(int id)
         {
-            var product = _unitOfWork.ProductRepo.GetProduct(id);
+            var product = _unitOfWork.ProductRepo.GetByID(id);
             if (product == null)
             {
                 return null;

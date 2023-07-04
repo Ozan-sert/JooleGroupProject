@@ -15,15 +15,9 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
 
         }
-        public Attribute GetAttribute(int id)
-        {
-            return GetByID(id);
-        }
+      
 
-        public IEnumerable<Attribute> GetAttributes()
-        {
-            return GetAll();
-        }
+       
         
         public IEnumerable<Attribute> GetAttributesByTechSpec()
         {

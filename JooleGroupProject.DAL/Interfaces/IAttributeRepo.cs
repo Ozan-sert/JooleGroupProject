@@ -7,10 +7,10 @@ using Attribute = JooleGroupProject.DAL.Models.Attribute;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IAttributeRepo 
+    public interface IAttributeRepo :IGenericRepo<Attribute>
     {
-        Attribute GetAttribute(int id);
-        IEnumerable<Attribute> GetAttributes();
+        
+      
         IEnumerable<Attribute> GetAttributesByTechSpec();
         IEnumerable<Attribute> GetAttributesByType();
     }
