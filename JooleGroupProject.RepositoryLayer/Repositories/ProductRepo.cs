@@ -16,7 +16,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         }
         public Product GetProduct(int id)
         {
-            return this.GetByID(id);
+            return GetByID(id);
 
         }
 
@@ -24,12 +24,12 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
 
         public IEnumerable<Product> GetProductsBySubCategory(int id)
         {
-            return this.GetMany(x => x.SubCategoryID == id);
+            return GetMany(x => x.SubCategoryID == id);
         }
 
         public IEnumerable<Product> GetProductsByModelYear(int year1, int year2)
         {
-            return this.GetMany(x => x.ModelYear >= year1 && x.ModelYear <= year2);
+            return GetMany(x => x.ModelYear >= year1 && x.ModelYear <= year2);
         }
 
     }
