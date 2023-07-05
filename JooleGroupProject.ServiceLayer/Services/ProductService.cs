@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace JooleGroupProject.ServiceLayer.Services
 {
@@ -42,5 +43,20 @@ namespace JooleGroupProject.ServiceLayer.Services
 
             return _mapper.Map<ProductDTO>(product);
         }
+
+
+        public List<ProductDTO> GetProductsBySubCategory(int subCategoryID)
+        {
+            var products = _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == subCategoryID);
+            return _mapper.Map<List<ProductDTO>>(products);
+        }
+    
+
+        public ProductDTO GetProductByName(string name)
+        {
+            var product = _unitOfWork.ProductRepo.Get(x => x.ProductName == name);
+            return _mapper.Map<ProductDTO>(product);
+        }
     }
+    
 }

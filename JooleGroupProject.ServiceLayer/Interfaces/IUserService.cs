@@ -9,7 +9,7 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
 {
     public interface IUserService
     {
-        UserDTO GetUserByID(int id);
-        void CreateUser(UserDTO userDTO);
+        UserDTO Login(UserDTO userDTO);
+        void RegisterUser(UserDTO userDTO);
     }
 }

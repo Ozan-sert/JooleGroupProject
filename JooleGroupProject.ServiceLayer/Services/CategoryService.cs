@@ -1,4 +1,5 @@
-﻿using JooleGroupProject.ServiceLayer.Interfaces;
+﻿using JooleGroupProject.DAL.Models;
+using JooleGroupProject.ServiceLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,9 @@ namespace JooleGroupProject.ServiceLayer.Services
 {
     public class CategoryService : ICategoryService
     {
+        public List<Category> GetCategories()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

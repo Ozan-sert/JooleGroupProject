@@ -27,23 +27,30 @@ namespace JooleGroupProject.ServiceLayer.Services
             var config = new MapperConfiguration(cfg =>   // AutoMapper Configuration
             {
                 cfg.CreateMap<User, UserDTO>();
+                cfg.CreateMap<UserDTO, User>();
             });
 
             _mapper = config.CreateMapper();
         }
 
-        public UserDTO GetUserByID(int id)
+      
+        public UserDTO Login(UserDTO newuser)
+
         {
-            var user = _unitOfWork.UserRepo.GetByID(id);
-            if (user == null)
+
+            var username = newuser.UserName;
+            var user = _unitOfWork.UserRepo.GetUserByName(username);
+
+            // Check if the user exists and if the provided password is correct
+            if (user != null && user.Password == newuser.Password)
             {
-                return null;
+                return _mapper.Map<UserDTO>(user);
             }
 
-            return _mapper.Map<UserDTO>(user);
+            return null; // Authentication failed
         }
 
-        public void CreateUser(UserDTO userDTO)
+        public void RegisterUser(UserDTO userDTO)
         {
             var user = _mapper.Map<User>(userDTO);
             _unitOfWork.UserRepo.AddUser(user);

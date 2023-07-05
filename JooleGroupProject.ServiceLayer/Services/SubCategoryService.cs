@@ -1,4 +1,5 @@
-﻿using JooleGroupProject.ServiceLayer.Interfaces;
+﻿using JooleGroupProject.DAL.Models;
+using JooleGroupProject.ServiceLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,9 @@ namespace JooleGroupProject.ServiceLayer.Services
 {
     public class SubCategoryService : ISubCategoryService
     {
+        public List<SubCategory> GetSubsforCategory(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

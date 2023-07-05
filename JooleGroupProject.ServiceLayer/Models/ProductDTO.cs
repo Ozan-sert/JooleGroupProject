@@ -8,5 +8,11 @@ namespace JooleGroupProject.ServiceLayer.Models
 {
     public class ProductDTO
     {
+        public int SubCategoryID { get; set; }
+        public string ProductName { get; set; }
+        public string Model { get; set; }
+        public string Manufacturer { get; set; }
+        public int ModelYear { get; set; }
+        public string Series { get; set; }
     }
 }

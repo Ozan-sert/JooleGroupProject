@@ -10,6 +10,8 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
     public interface IProductService
     {
         ProductDTO GetProductById(int id);
+        List<ProductDTO> GetProductsBySubCategory(int subCategoryID);
+        ProductDTO GetProductByName(string name);
       
     }
 }
