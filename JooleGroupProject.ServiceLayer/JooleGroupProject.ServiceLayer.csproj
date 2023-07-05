@@ -54,22 +54,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAttributeService.cs" />
-    <Compile Include="Interfaces\ICategoryService.cs" />
-    <Compile Include="Interfaces\IProductAttributeService.cs" />
+    <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
-    <Compile Include="Interfaces\ISubCategoryService.cs" />
-    <Compile Include="Interfaces\ITechSpecFilterService.cs" />
+    <Compile Include="Interfaces\IResultService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\CategoryDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
+    <Compile Include="Models\SubCategoryDTO.cs" />
+    <Compile Include="Models\TechSpecFilterDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AttributeService.cs" />
-    <Compile Include="Services\CategoryService.cs" />
-    <Compile Include="Services\ProductAttributeService.cs" />
+    <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Services\SubCategoryService.cs" />
-    <Compile Include="Services\TechSpecFilterService.cs" />
+    <Compile Include="Services\ResultService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

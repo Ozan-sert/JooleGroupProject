@@ -32,7 +32,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbContext.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where)

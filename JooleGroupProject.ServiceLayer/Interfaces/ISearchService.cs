@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.ServiceLayer.Interfaces
 {
-    public interface IProductService
+    public interface ISearchService
     {
 
-        ProductDTO GetProductById(int id);
-        ProductDTO GetProductByName(string name);
-      
+        List<CategoryDTO> GetCategories();
+       
+        List<SubCategoryDTO> GetSubsforCategory(int id);
+
     }
 }

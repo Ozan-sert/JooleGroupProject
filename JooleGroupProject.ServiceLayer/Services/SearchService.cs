@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using JooleGroupProject.DAL.Interfaces;
 using JooleGroupProject.DAL.Models;
-using JooleGroupProject.RepositoryLayer.Repositories;
 using JooleGroupProject.RepositoryLayer;
+using JooleGroupProject.RepositoryLayer.Repositories;
 using JooleGroupProject.ServiceLayer.Interfaces;
 using JooleGroupProject.ServiceLayer.Models;
 using System;
@@ -10,49 +10,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace JooleGroupProject.ServiceLayer.Services
 {
-    public class ProductService : IProductService
+    public class SearchService : ISearchService
     {
         private readonly MyDBContext _context;
         private readonly IMapper _mapper;
         public IUnitOfWork _unitOfWork;
-
-        public ProductService()
+        public SearchService()
         {
             _context = new MyDBContext();
             _unitOfWork = new UnitOfWork(_context);
 
             var config = new MapperConfiguration(cfg =>   // AutoMapper Configuration
             {
+                cfg.CreateMap<SubCategory, SubCategoryDTO>();
+                cfg.CreateMap<Category, CategoryDTO>();
                 cfg.CreateMap<Product, ProductDTO>();
             });
 
             _mapper = config.CreateMapper();
         }
-
-        public ProductDTO GetProductById(int id)
+        public List<CategoryDTO> GetCategories()
         {
-            var product = _unitOfWork.ProductRepo.GetByID(id);
-            if (product == null)
-            {
-                return null;
-            }
-
-            return _mapper.Map<ProductDTO>(product);
+            var categories = _unitOfWork.CategoryRepo.GetAll().ToList();
+            return _mapper.Map<List<CategoryDTO>>(categories);
         }
-    
 
-     
-    
 
-        public ProductDTO GetProductByName(string name)
+        public List<SubCategoryDTO> GetSubsforCategory(int id)
         {
-            var product = _unitOfWork.ProductRepo.Get(x => x.ProductName == name);
-            return _mapper.Map<ProductDTO>(product);
+            var subCategories = _unitOfWork.SubCategoryRepo.GetMany(x => x.CategoryID == id);
+           return _mapper.Map<List<SubCategoryDTO>>(subCategories);
         }
     }
-    
 }
