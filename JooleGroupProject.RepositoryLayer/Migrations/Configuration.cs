@@ -456,9 +456,9 @@
                 new ProductAttribute { ProductID = 23, AttributeID = 66, AttributeValue = "Yes" },
 
             };
-            foreach (var attribute in attributes)
+            foreach (var attribute in productAttributes)
             {
-                context.Attributes.AddOrUpdate(attribute);
+                context.AttributeValues.AddOrUpdate(attribute);
             }
 
 
