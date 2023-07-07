@@ -41,21 +41,37 @@ namespace JooleGroupProject.ServiceLayer.Services
             return _mapper.Map<List<ProductDTO>>(products);
         }
 
-        public List<TechSpecFilterDTO> getTechSpecFilterNamesForSubCategory(int sub)
+        public List<TechSpecFilterDTO> getTechSpecFiltersForSubCategory(int sub)
         {
-            IEnumerable<Attribute> propertyList = _unitOfWork.AttributeRepo.GetAll();
+            IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAll();
             IEnumerable<TechSpecFilter> specFilterList = _unitOfWork.TechSpecFilterRepo.GetMany(x => x.SubCategoryID == sub);
 
-            var results = (from t1 in propertyList
+            var results = (from t1 in attributeList
                            join t2 in specFilterList on t1.AttributeID equals t2.AttributeID
                            select t2);
 
             List<TechSpecFilterDTO> techSpecFilters = _mapper.Map<List<TechSpecFilterDTO>>(results);
             return techSpecFilters.ToList();
         }
-        public IEnumerable<Product> GetProductsFiltered(int sub, int year1, int year2)
+        public List<IndividualSpecDTO> getIndividualPropertiesBySubCategory(int subid)
         {
-            return _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == sub && (x.ModelYear >= year1 && x.ModelYear <= year2)).ToList();
+            IEnumerable<Attribute> properties = _unitOfWork.AttributeRepo.GetAttributesByIndividual();
+            var categortyID = _unitOfWork.SubCategoryRepo.GetByID(subid);
+            IEnumerable<ProductAttribute> specs = _unitOfWork.ProductAttributeRepo.GetMany(x => x.subca)
+            var results = (from t1 in properties
+                           join t2 in specs on t1.PropertyID equals t2.PropertyID
+                           select new ProductIndividualSpec
+                           {
+                               PropertyName = t1.PropertyName,
+                               iValue = t2.iValue,
+                               ProductID = t2.ProductID
+                           }).ToList();
+            return results;
+        }
+        public IEnumerable<ProductDTO> GetProductsFiltered(int sub, int year1, int year2)
+        {
+            var products = _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == sub && (x.ModelYear >= year1 && x.ModelYear <= year2)).ToList();
+            return _mapper.Map<List<ProductDTO>>(products);
         }
     }
 }

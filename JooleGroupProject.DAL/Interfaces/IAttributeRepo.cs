@@ -12,6 +12,6 @@ namespace JooleGroupProject.DAL.Interfaces
         
       
         IEnumerable<Attribute> GetAttributesByTechSpec();
-        IEnumerable<Attribute> GetAttributesByType();
+        IEnumerable<Attribute> GetAttributesByIndividual();
     }
 }

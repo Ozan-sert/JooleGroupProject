@@ -11,8 +11,8 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
 {
     public interface IResultService
     {
-        IEnumerable<Product> GetProductsFiltered(int sub, int year1, int year2);
+        IEnumerable<ProductDTO> GetProductsFilteredBySubCategory(int sub, int year1, int year2);
         List<ProductDTO> GetProductsBySubCategory(int subCategoryID);
-        List<TechSpecFilterDTO> getTechSpecFilterNamesForSubCategory(int sub);
+        List<TechSpecFilterDTO> getTechSpecFiltersForSubCategory(int sub);
     }
 }
