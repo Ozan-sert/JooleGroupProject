@@ -20,7 +20,7 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
        
         
         public IEnumerable<Attribute> GetAttributesByTechSpec() => GetMany(x => x.IsTechSpec == true);
-        public IEnumerable<Attribute> GetAttributesByIndividual() => GetMany(x => x.IsTechSpec == false && x.IsType == false);
+        public IEnumerable<Attribute> GetAttributesByType() => GetMany(x =>x.IsType == true);
 
     }
 }

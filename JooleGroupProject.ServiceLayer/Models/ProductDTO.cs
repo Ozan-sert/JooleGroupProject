@@ -14,5 +14,7 @@ namespace JooleGroupProject.ServiceLayer.Models
         public string Manufacturer { get; set; }
         public int ModelYear { get; set; }
         public string Series { get; set; }
+
+        public List<ProductAttributeDTO> Attributes { get; set; }
     }
 }

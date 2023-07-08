@@ -29,8 +29,15 @@ namespace JooleGroupProject.ServiceLayer.Services
             {
                 cfg.CreateMap<Product, ProductDTO>();
                 cfg.CreateMap<TechSpecFilter, TechSpecFilterDTO>()
-       .ForMember(dest => dest.AttributeName, opt => opt.MapFrom(src => src.Attribute.AttributeName));
+                    .ForMember(dest => dest.AttributeName, opt => opt.MapFrom(src => src.Attribute.AttributeName));
+                cfg.CreateMap<ProductAttribute, ProductAttributeDTO>()
+                    .ForMember(dest => dest.AttributeName, opt => opt.MapFrom(src => src.Attribute.AttributeName))
+                    .ForMember(dest => dest.IsTechSpec, opt => opt.MapFrom(src => src.Attribute.IsTechSpec))
+                    .ForMember(dest => dest.IsType, opt => opt.MapFrom(src => src.Attribute.IsType));
+                ;
+
             });
+
 
             _mapper = config.CreateMapper();
         }
@@ -41,9 +48,9 @@ namespace JooleGroupProject.ServiceLayer.Services
             return _mapper.Map<List<ProductDTO>>(products);
         }
 
-        public List<TechSpecFilterDTO> getTechSpecFiltersForSubCategory(int sub)
+        public List<TechSpecFilterDTO> GetTechSpecFiltersForSubCategory(int sub)
         {
-            IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAll();
+            IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAttributesByTechSpec();
             IEnumerable<TechSpecFilter> specFilterList = _unitOfWork.TechSpecFilterRepo.GetMany(x => x.SubCategoryID == sub);
 
             var results = (from t1 in attributeList
@@ -53,31 +60,49 @@ namespace JooleGroupProject.ServiceLayer.Services
             List<TechSpecFilterDTO> techSpecFilters = _mapper.Map<List<TechSpecFilterDTO>>(results);
             return techSpecFilters.ToList();
         }
-        public List<IndividualSpecDTO> GetIndividualPropertiesBySubCategory(int subid)
+
+        public List<ProductAttributeDTO> GetIndividualProperties(int subid)
         {
-            //IEnumerable<Attribute> properties = _unitOfWork.AttributeRepo.GetAttributesByIndividual();
-            //var categortyID = _unitOfWork.SubCategoryRepo.GetByID(subid);
-            //IEnumerable<ProductAttribute> specs = _unitOfWork.ProductAttributeRepo.GetMany(x => x.subca)
-            //var results = (from t1 in properties
-            //               join t2 in specs on t1.PropertyID equals t2.PropertyID
-            //               select new ProductIndividualSpec
-            //               {
-            //                   PropertyName = t1.PropertyName,
-            //                   iValue = t2.iValue,
-            //                   ProductID = t2.ProductID
-            //               }).ToList();
-            //return results;
-            throw new NotImplementedException();
+        
+            IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAttributesByTechSpec();
+            IEnumerable<ProductAttribute> productAttributeList = _unitOfWork.ProductAttributeRepo.GetMany(x => x.Product.SubCategoryID == subid);
+
+            var results = (from attr in attributeList
+                           join prodAttr in productAttributeList on attr.AttributeID equals prodAttr.AttributeID
+                           select prodAttr);
+
+            List<ProductAttributeDTO> productAttributes = _mapper.Map<List<ProductAttributeDTO>>(results);
+            return productAttributes.ToList();
         }
-        public IEnumerable<ProductDTO> GetProductsFiltered(int sub, int year1, int year2)
+        public List<ProductAttributeDTO> GetIndividualProperties(int subid, int productID)
+        {
+            IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAttributesByTechSpec();
+            IEnumerable<ProductAttribute> productAttributeList = _unitOfWork.ProductAttributeRepo.GetMany(x => x.ProductID == productID);
+
+            var results = (from attr in attributeList
+                           join prodAttr in productAttributeList on attr.AttributeID equals prodAttr.AttributeID
+                           select prodAttr);
+
+            List<ProductAttributeDTO> productAttributes = _mapper.Map<List<ProductAttributeDTO>>(results);
+            return productAttributes.ToList();
+        }
+        public List<ProductDTO> GetProductsWithIndividualProperties(int subid)
+        {
+            var products = _unitOfWork.ProductRepo.GetProductsBySubCategory(subid);
+            var productDTOs = _mapper.Map<List<ProductDTO>>(products);
+
+            foreach (var productDTO in productDTOs)
+            {
+                var productAttributes = GetIndividualProperties(subid, productDTO.ProductID);
+                productDTO.Attributes = productAttributes;
+            }
+
+            return productDTOs;
+        }
+        public IEnumerable<ProductDTO> GetProductsFilteredBySubCategory(int sub, int year1, int year2)
         {
             var products = _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == sub && (x.ModelYear >= year1 && x.ModelYear <= year2)).ToList();
             return _mapper.Map<List<ProductDTO>>(products);
-        }
-
-        public IEnumerable<ProductDTO> GetProductsFilteredBySubCategory(int sub, int year1, int year2)
-        {
-            throw new NotImplementedException();
         }
     }
 }
