@@ -467,16 +467,16 @@
                 // TechSpecFilter for Fans
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 5, MinValue = 1000, MaxValue = 7000 }, // Air Flow(CFM)
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 6, MinValue = 10, MaxValue = 500 }, // Power(W)_Min
-                new TechSpecFilter { SubCategoryID = 1, AttributeID = 7, MinValue = 100, MaxValue = 1000 }, // Power(W)_Max
+                new TechSpecFilter { SubCategoryID = 1, AttributeID = 7, MinValue = 20, MaxValue = 1000 }, // Power(W)_Max
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 8, MinValue = 110, MaxValue = 240 }, // Operating Voltage(VAC)_Min
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 9, MinValue = 110, MaxValue = 240 }, // Operating Voltage(VAC)_Max
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 10, MinValue = 100, MaxValue = 3000 }, // Fan Speed(RPM)_Min
-                new TechSpecFilter { SubCategoryID = 1, AttributeID = 11, MinValue = 1500, MaxValue = 5000 }, // Fan Speed(RPM)_Max
+                new TechSpecFilter { SubCategoryID = 1, AttributeID = 11, MinValue = 1000, MaxValue = 5000 }, // Fan Speed(RPM)_Max
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 12, MinValue = 1, MaxValue = 5 }, // Number of Fan Speeds
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 13, MinValue = 10, MaxValue = 60 }, // Sound at Max Speed(dBA)
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 14, MinValue = 10, MaxValue = 60 }, // Fan Sweep Diameter(in)
-                new TechSpecFilter { SubCategoryID = 1, AttributeID = 15, MinValue = 10, MaxValue = 60 }, // Height(in)_Min
-                new TechSpecFilter { SubCategoryID = 1, AttributeID = 16, MinValue = 10, MaxValue = 60 }, // Height(in)_Max
+                new TechSpecFilter { SubCategoryID = 1, AttributeID = 15, MinValue = 5, MaxValue = 60 }, // Height(in)_Min
+                new TechSpecFilter { SubCategoryID = 1, AttributeID = 16, MinValue = 5, MaxValue = 60 }, // Height(in)_Max
                 new TechSpecFilter { SubCategoryID = 1, AttributeID = 17, MinValue = 5, MaxValue = 30 }, // Weight(lbs)
 
                 // TechSpecFilter for Vacuums

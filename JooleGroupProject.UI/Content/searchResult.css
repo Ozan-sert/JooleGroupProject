@@ -2,8 +2,14 @@
 .filter {
     background: #f8f8f8;
     border: 1px solid gray;
+    height: auto !important;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 10px
 }
-
+.filter-container {
+}
 .filter-item {
     border-bottom: 1px solid gray;
 }
@@ -59,4 +65,33 @@
 
 .hidden {
     display: none !important;
+}
+.product-card{
+    height:auto;
+}
+
+.product {
+    border: 2px solid #dfdfdf;
+    border-radius: 5px;
+    margin:10px 0;
+}
+
+.product-img {
+    width: 95%;
+    padding-top: 95%;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    margin-top:10px;
+}
+
+
+.product-img img {
+position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    margin:auto;
 }
