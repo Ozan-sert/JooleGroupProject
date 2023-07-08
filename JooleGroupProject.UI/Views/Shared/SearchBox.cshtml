@@ -1,0 +1,63 @@
+﻿@model JooleGroupProject.UI.Models.SearchViewModel
+
+
+<script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+
+<style>
+    form {
+        text-align: center;
+        width: 600px;
+        height: 30px;
+    }
+
+    select {
+        display: inline-block;
+        background-color: #1F71A7;
+        height: 95%;
+        border-radius: 5%;
+        padding: 5px;
+        font-size: 18%;
+        border: 1px solid white;
+        outline: none;
+    }
+
+    .searchBox {
+        display: inline-block;
+        margin-left: -2px;
+        height: 95%;
+        border-radius: 5%;
+        width: 400px;
+        font-size: 18%;
+        border: 1px solid #1F71A7;
+        outline: none;
+    }
+
+    .searchButton {
+        display: inline-block;
+        background-color: #1F71A7;
+        height: 95%;
+        border-radius: 10%;
+        border: 1px solid white;
+        outline: none;
+    }
+</style>
+
+<form>
+    <select>
+        @foreach (var category in Model.Categories)
+        {
+            <option value=@category.CategoryID style="background-color: white">@category.CategoryName</option>
+        }
+    </select>
+
+    <input type="text" placeholder="Search" class="searchBox" />
+
+    <button class="searchButton">
+        <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+    </button>
+
+</form>
+
+
+
+

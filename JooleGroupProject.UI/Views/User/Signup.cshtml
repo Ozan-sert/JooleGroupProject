@@ -1,4 +1,4 @@
-﻿@model JooleGroupProject.ServiceLayer.Models.UserDTO
+﻿@model JooleGroupProject.UI.Models.RegisterViewModel
 
 @{
     ViewBag.Title = "Signup";
@@ -10,18 +10,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+
     <title>Enter</title>
     <style>
         .error {
             color: red;
-            font-size: 10%;
+            font-size: 12px;
         }
 
         .inputtx {
             display: inline-block;
-            width: 30%;
+            width: 25%;
             text-align: left;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .inputbox {
@@ -34,16 +37,17 @@
     </style>
 </head>
 <body>
-    <form style="background-color: white; border-radius: 3%; margin-left: 20%; margin-right: 20%; margin-top: 10%" action="Submit" method="post">
-        <div style="padding: 2%; border-bottom:1px solid #F0F0F0;">
-            <label style="font-weight: bold; font-size: 20px; ">Register as User</label>
+    <form style="background-color: white; border-radius: 3%; margin-left: 30%; margin-right: 30%; margin-top: 6%" action="Submit" method="post">
+        <div style="display: flex; justify-content: space-between; padding: 2%; border-bottom: 1px solid #F0F0F0; ">
+            <label style="font-weight: bold; font-size: 18px;">Register as User</label>
+            <i class="fa-regular fa-circle-xmark fa-lg" style="color: lightslategray; padding: 2%" id="cancel"></i>
         </div>
         <div style="padding: 2%">
-            <span class="inputtx" , style="margin-left: 30%; margin-bottom: 1%">Image Preview</span>
-            <div id="profile" style="background-color: gray; width: 100px; height: 100px; border-radius: 50%; margin-left: 30%"></div>
-            <span class="inputtx" , style="margin-left: 30%; margin-top: 1%">Your Profile</span>
+            <span class="inputtx" , style="margin-left: 25%; margin-bottom: 1%">Image Preview</span>
+            <div id="profile" style="background-color: gray; width: 100px; height: 100px; border-radius: 50%; margin-left: 25%"></div>
+            <span class="inputtx" , style="margin-left: 25%; margin-top: 1%">Your Profile</span>
             <br />
-            <input type="file" accept="image/jpg, image/png, image/jpeg" onchange="showImg(this)" style="margin-left: 30%" required />
+            <input type="file" accept="image/jpg, image/png, image/jpeg" onchange="showImg(this)" style="margin-left: 25%" required />
             <br />
             <br />
             <span class="inputtx">UserName: </span>
@@ -59,7 +63,7 @@
             <label class="error">@Html.ValidationMessageFor(m => m.Password)</label>
             <br />
             <span class="inputtx">Confirm Password: </span>
-            <input type="password" name="ConfirmPwd" class="inputbox" placeholder="Confirm Password" />
+            <input type="password" name="ConfirmPassword" class="inputbox" placeholder="Confirm Password" />
             <label class="error">@Html.ValidationMessageFor(m => m.ConfirmPassword)</label>
         </div>
         <div style="text-align: right; padding: 2%; border-top:1px solid #F0F0F0;">
@@ -77,6 +81,9 @@
             var element = "<div style='background:url(" + url + "); background-size:cover; width: 100px; height: 100px; border-radius: 50%'></div>";
             return element;
         }
+        document.getElementById("cancel").onclick = function () {
+            window.location.href = '@Url.Action("Login", "User")';
+        };
     </script>
 </body>
 </html>

@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IResultService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\CategoryDTO.cs" />
+    <Compile Include="Models\ProductAttributeDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\SubCategoryDTO.cs" />
     <Compile Include="Models\TechSpecFilterDTO.cs" />
