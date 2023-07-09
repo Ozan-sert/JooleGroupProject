@@ -296,8 +296,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Login2.cshtml" />
     <Content Include="Views\Shared\Background.cshtml" />
     <Content Include="Views\User\Signup.cshtml" />
     <Content Include="Views\Shared\SearchBox.cshtml" />

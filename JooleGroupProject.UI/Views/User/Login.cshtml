@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/Background.cshtml"; 
+    Layout = "~/Views/Shared/Background.cshtml";
 }
 
 <!DOCTYPE html>
@@ -13,19 +13,19 @@
     <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
     <style>
         .icon {
-            height: 25px; 
-            width: 25px; 
-            text-align: center; 
-            display: inline-block; 
-            margin-left: -30px; 
+            height: 25px;
+            width: 25px;
+            text-align: center;
+            display: inline-block;
+            margin-left: -30px;
         }
 
         .field-input {
-            width: 50%; 
-            height: 25px; 
+            width: 50%;
+            height: 25px;
             border-radius: 5%;
-            outline: none; 
-            border: 1px solid white; 
+            outline: none;
+            border: 1px solid white;
         }
 
         .field {
@@ -39,39 +39,39 @@
             width: 8%;
             height: 25px;
             background-color: #357AB5;
-            border: none; 
-            border-radius: 5%; 
-            color: white; 
-        } 
+            border: none;
+            border-radius: 5%;
+            color: white;
+        }
 
         .login-button:active {
-            border: 2px solid white; 
+            border: 2px solid white;
         }
 
         .signup-link {
-            text-decoration: none; 
-            margin-left: 80%; 
-            color: black; 
+            text-decoration: none;
+            margin-left: 80%;
+            color: black;
         }
 
-        .signup-link:active{
-            color: white; 
+        .signup-link:active {
+            color: white;
         }
 
         .error {
-            width: 50%; 
+            width: 50%;
             margin-left: 25%;
             font-size: 16px;
-            color: red; 
+            color: red;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class="signup-link" })
+        @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class = "signup-link" })
 
-        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center">
+        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center; margin-top: 10%">
             <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
             <p style="font-size: 18px">Building Product Selection Platform</p>
             <form action="Login" method="post">
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-</body> 
+</body>
 </html>
 
 

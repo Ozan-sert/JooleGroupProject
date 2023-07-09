@@ -26,14 +26,14 @@ namespace JooleGroupProject.UI.Controllers
         }
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult Index(LoginViewModel loginUser)
+        public ActionResult Login(LoginViewModel loginUser)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace JooleGroupProject.UI.Controllers
                 }
 
                 // If login is successful, you can redirect to another action or view
-                return RedirectToAction("Index", "Home"); // Redirect to Home/Index
+                return RedirectToAction("Index", "Search"); // Redirect to Search/Index
             }
 
             return View();
@@ -69,7 +69,7 @@ namespace JooleGroupProject.UI.Controllers
                 // For example, save it to the database, send an email, etc.
                 myservice.RegisterUser(userDTO);
                 // After successful processing, you might want to redirect to a success page
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "User");
             }
             else
             {
