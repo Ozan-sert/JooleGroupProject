@@ -16,6 +16,6 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
         List<ProductDTO> GetProductsBySubCategory(int subCategoryID);
         List<TechSpecFilterDTO> GetTechSpecFilterNamesForSubCategory(int sub);
         List<ProductAttributeDTO> GetIndividualProperties(int subid);
-
+        int GetSubCategoryID(string subCategoryName);
     }
 }

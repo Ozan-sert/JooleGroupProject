@@ -12,6 +12,8 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
 
         ProductDTO GetProductById(int id);
         ProductDTO GetProductByName(string name);
-      
+        int GetTechSpecValueForProduct(int productID, int attributeID);
+
+
     }
 }

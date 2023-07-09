@@ -115,6 +115,12 @@ namespace JooleGroupProject.ServiceLayer.Services
             List<ProductAttributeDTO> productAttributes = _mapper.Map<List<ProductAttributeDTO>>(results);
             return productAttributes.ToList();
         }
+
+        public int GetSubCategoryID(string subCategoryName)
+        {
+            int subCategoryID = _unitOfWork.SubCategoryRepo.Get(x => x.SubCategoryName == subCategoryName).SubCategoryID;
+            return subCategoryID;
+        }
         //public List<ProductAttributeDTO> GetIndividualProperties(int subid, int productID)
         //{
         //    IEnumerable<Attribute> attributeList = _unitOfWork.AttributeRepo.GetAttributesByTechSpec();

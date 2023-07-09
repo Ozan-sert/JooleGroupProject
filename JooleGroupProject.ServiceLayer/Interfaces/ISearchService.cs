@@ -14,6 +14,7 @@ namespace JooleGroupProject.ServiceLayer.Interfaces
        
         List<SubCategoryDTO> GetSubsforCategory(int id);
 
-        string GetCategoryNameByID(int id); 
+        string GetCategoryNameByID(int id);
+        SubCategoryDTO GetSubCategoryByName(string name);
     }
 }

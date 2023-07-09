@@ -16,14 +16,16 @@ namespace JooleGroupProject.UI.Controllers
     public class SearchResultController : Controller
     {
         // Instantiate the service layer
-        private readonly ResultService resultService = new ResultService();
-        private readonly SearchService searchService = new SearchService();
-        private readonly ProductService productService = new ProductService();
+        private readonly IResultService resultService = new ResultService();
+        private readonly ISearchService searchService = new SearchService();
+        private readonly IProductService productService = new ProductService();
 
         // GET: SearchResult
-        public ActionResult Index(int subCategoryID, string categoryName, string subCategoryName)
+        public ActionResult Index(string categoryName, string subCategoryName)
         {
             SearchResultVM viewModel = new SearchResultVM();
+            int subCategoryID = resultService.GetSubCategoryID(subCategoryName);
+
             viewModel.techSpecFilters = resultService.GetTechSpecFilterNamesForSubCategory(subCategoryID);
             viewModel.CategoryName = categoryName;
             viewModel.SubCategoryName = subCategoryName;
