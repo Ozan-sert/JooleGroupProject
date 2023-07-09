@@ -63,21 +63,6 @@
 
 @section Scripts {
     <script>
-        //function handleSelect() {
-
-        //    var selectedValue = document.getElementById("categorySelector").value;
-
-        //    axios.post("/Search/selectCategory", {
-        //        data: selectedValue
-        //    })
-        //        .then(function (response) {
-        //            console.log("successfully search");
-        //            document.getElementById("searchBox").value = response.data;
-        //        })
-        //        .catch(function (error) {
-        //            console.error(error)
-        //        })
-        //}
         $(document).ready(function () {
             $("#categorySelector").on("change", function () {
                 var selectedOption = $(this).val();
