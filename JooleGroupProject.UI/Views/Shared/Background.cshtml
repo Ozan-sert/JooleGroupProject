@@ -10,10 +10,18 @@
         }
     </style>
     <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+    <script src="http://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    @RenderSection("Styles", required: false)
 </head>
-<body  style="background-image: linear-gradient(#28709F, #F8F9FB);">
+<body style="background-image: linear-gradient(#28709F, #F8F9FB);">
     <div class="container body-content">
         @RenderBody()
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/jqueryuicss")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </body>
 </html>

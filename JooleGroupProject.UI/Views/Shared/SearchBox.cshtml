@@ -1,36 +1,29 @@
 ﻿@model JooleGroupProject.UI.Models.SearchViewModel
 
-<!DoCTYPE html>
-<html>
-<head>
-    <script src="http://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="http://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<form>
+    <select id="categorySelector">
+        @foreach (var category in @Model.Categories)
+        {
+            <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
+        }
+    </select>
 
-    <script>
-        $(document).ready(function () {
-            var selectedOption = $("#categorySelector").val();
-            axios.post("/Search/selectCategory", { data: selectedOption })
-                .then(function (response) {
-                    console.log("success");
+    <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
 
-                    var autocompleteSource = response.data.tags;
+    <button id="search" class="searchButton" type="button">
+        <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+    </button>
 
-                    console.log("data: " + response.data.tags);
 
-                    $("#subcategorySelector").autocomplete({
-                        source: autocompleteSource
-                    });
-                })
-                .catch(function (error) {
-                    console.log("Error:", error);
-                });
-        });
-    </script>
 
+</form>
+
+
+
+
+@section Styles {
     <style>
+        /* Custom CSS for this specific view */
         form {
             text-align: center;
             width: 600px;
@@ -43,7 +36,6 @@
             height: 95%;
             border-radius: 5%;
             padding: 5px;
-           
             border: 1px solid white;
             outline: none;
         }
@@ -54,7 +46,6 @@
             height: 95%;
             border-radius: 5%;
             width: 400px;
-          
             border: 1px solid #1F71A7;
             outline: none;
         }
@@ -68,25 +59,9 @@
             outline: none;
         }
     </style>
-</head>
+}
 
-<body>
-    <form>
-        <select id="categorySelector">
-            @foreach (var category in @Model.Categories)
-            {
-                <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
-            }
-        </select>
-
-        <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
-
-        <button id="search" class="searchButton" type="button">
-            <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
-        </button>
-
-    </form>
-
+@section Scripts {
     <script>
         //function handleSelect() {
 
@@ -112,13 +87,13 @@
 
         function updateAutocompleteSource(selectedOption) {
             axios.post("/Search/selectCategory", { data: selectedOption })
-                .then(function (response) { 
-                    console.log("success"); 
+                .then(function (response) {
+                    console.log("success");
 
-                    var autocompleteSource = response.data.tags; 
+                    var autocompleteSource = response.data.tags;
 
-                    console.log("data: " + response.data.tags); 
-                    
+                    console.log("data: " + response.data.tags);
+
                     $("#subcategorySelector").autocomplete({
                         source: autocompleteSource
                     });
@@ -127,20 +102,33 @@
                     console.log("Error:", error);
                 });
         }
+        $(document).ready(function () {
+            var selectedOption = $("#categorySelector").val();
+            axios.post("/Search/selectCategory", { data: selectedOption })
+                .then(function (response) {
+                    console.log("success");
 
-    </script>
+                    var autocompleteSource = response.data.tags;
 
-    <script>
+                    console.log("data: " + response.data.tags);
 
+                    $("#subcategorySelector").autocomplete({
+                        source: autocompleteSource
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error:", error);
+                });
+        });
 
         document.getElementById("search").addEventListener("click", function () {
-           
+
             var selectedCategoryName = $("#categorySelector option:selected").text(); // Get the selected category name
             //subcategory name
             var selectedSubCategory = document.getElementById("subcategorySelector").value;
 
-            console.log(selectedCategoryName); 
-            console.log(selectedSubCategory); 
+            console.log(selectedCategoryName);
+            console.log(selectedSubCategory);
 
             // Construct the URL with parameters
             var destinationURL = "/SearchResult/Index" +
@@ -151,24 +139,22 @@
             window.location.href = destinationURL;
 
             //axios.post("/Search/toResult", {
-                
-            //    //categoryID: selectedCategory, 
-            //    data: selectedSubCategory 
-                
+
+            //    //categoryID: selectedCategory,
+            //    data: selectedSubCategory
+
             //})
-            //    .then(function (response) { 
+            //    .then(function (response) {
             //        console.log(response.data);
-            //        window.location.href = response.data; 
+            //        window.location.href = response.data;
             //    })
             //    .catch(function (error) {
             //        console.log("Error:", error);
             //    })
         })
     </script>
-</body>
 
-</html>
-
+}
 
 
 

@@ -5,13 +5,9 @@
     Layout = "~/Views/Shared/Background.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+@section Styles {
     <style>
+        /* Custom CSS for this specific view */
         .icon {
             height: 25px;
             width: 25px;
@@ -44,9 +40,9 @@
             color: white;
         }
 
-        .login-button:active {
-            border: 2px solid white;
-        }
+            .login-button:active {
+                border: 2px solid white;
+            }
 
         .signup-link {
             text-decoration: none;
@@ -54,9 +50,9 @@
             color: black;
         }
 
-        .signup-link:active {
-            color: white;
-        }
+            .signup-link:active {
+                color: white;
+            }
 
         .error {
             width: 50%;
@@ -65,41 +61,37 @@
             color: red;
         }
     </style>
-</head>
+}
 
-<body>
-    <div class="container">
-        @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class = "signup-link" })
+<div class="container">
+    @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class = "signup-link" })
 
-        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center; margin-top: 10%">
-            <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
-            <p style="font-size: 18px">Building Product Selection Platform</p>
-            <form action="Login" method="post">
-                <div class="field">
-                    <input class="field-input" name="UsernameOrEmail" placeholder="Username or Email" type="text" />
-                    <div class="icon">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
+    <div style="width: 60%; margin: 0 20% 0 20%; text-align: center; margin-top: 10%">
+        <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
+        <p style="font-size: 18px">Building Product Selection Platform</p>
+        <form action="Login" method="post">
+            <div class="field">
+                <input class="field-input" name="UsernameOrEmail" placeholder="Username or Email" type="text" />
+                <div class="icon">
+                    <i class="fa-solid fa-user"></i>
                 </div>
-                <br />
-                <div class="field">
-                    <input class="field-input" name="Password" placeholder="Password" type="password" />
-                    <div class="icon">
-                        <i class="fa-solid fa-key"></i>
-                    </div>
+            </div>
+            <br />
+            <div class="field">
+                <input class="field-input" name="Password" placeholder="Password" type="password" />
+                <div class="icon">
+                    <i class="fa-solid fa-key"></i>
                 </div>
-                <br />
-                <input class="login-button" type="submit" value="Log In" />
-                <br />
-                <div class="error">
-                    @Html.ValidationSummary()
-                </div>
-            </form>
-        </div>
+            </div>
+            <br />
+            <input class="login-button" type="submit" value="Log In" />
+            <br />
+            <div class="error">
+                @Html.ValidationSummary()
+            </div>
+        </form>
     </div>
-
-</body>
-</html>
+</div>
 
 
 
