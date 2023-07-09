@@ -5,6 +5,31 @@
     Layout = "~/Views/Shared/Background.cshtml";
 }
 
-<main>
-    @Html.Partial("SearchBox", Model)
-</main>
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container" style="margin-top: 10%">
+
+        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center">
+            <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
+            <p style="font-size: 18px">Building Product Selection Platform</p>
+            <div style="display: inline-block">
+                @Html.Partial("SearchBox", Model)
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

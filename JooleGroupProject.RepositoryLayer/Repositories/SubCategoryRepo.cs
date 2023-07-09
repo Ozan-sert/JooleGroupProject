@@ -19,5 +19,10 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
             return GetMany(x => x.CategoryID == id);
         }
+
+        public SubCategory GetSubCategoryByName(string name)
+        {
+            return Get(x => x.SubCategoryName.Equals(name)); 
+        }
     }
 }

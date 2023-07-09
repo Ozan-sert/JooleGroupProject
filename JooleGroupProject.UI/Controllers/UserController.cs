@@ -31,6 +31,28 @@ namespace JooleGroupProject.UI.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult Index(LoginViewModel loginUser)
+        {
+            if (ModelState.IsValid)
+            {
+                UserDTO user = myservice.Login(loginUser.UsernameOrEmail, loginUser.Password);
+
+                if (user == null)
+                {
+                    // If login is not successful, redirect to a different action or view
+                    // For example, you can redirect to a "LoginFailed" action or view
+                    return View();
+                }
+
+                // If login is successful, you can redirect to another action or view
+                return RedirectToAction("Index", "Home"); // Redirect to Home/Index
+            }
+
+            return View();
+        }
+
         public ActionResult Signup() 
         {
             return View();
@@ -47,7 +69,7 @@ namespace JooleGroupProject.UI.Controllers
                 // For example, save it to the database, send an email, etc.
                 myservice.RegisterUser(userDTO);
                 // After successful processing, you might want to redirect to a success page
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -57,30 +79,5 @@ namespace JooleGroupProject.UI.Controllers
             //return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult Login(LoginViewModel loginUser)
-        {
-            if (ModelState.IsValid) {
-                UserDTO newuser = myservice.Login(loginUser.UsernameOrEmail, loginUser.Password);
-
-                if (newuser == null)
-                {
-                    // If login is not successful, redirect to a different action or view
-                    // For example, you can redirect to a "LoginFailed" action or view
-                    return RedirectToAction("Login");
-                }
-
-                // If login is successful, you can redirect to another action or view
-                return RedirectToAction("Index", "Home"); // Redirect to Home/Index
-            }
-
-            return View("login");
-        }
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="Models\SearchResultVM.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\ResultViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\TestVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +213,8 @@
     <Content Include="Views\Shared\SearchBox.cshtml" />
     <Content Include="Views\Shared\ProductLayout.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\SearchError.cshtml" />
+    <Content Include="Views\Search\ProductResult.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\SearchResult\Index.cshtml" />
     <Content Include="Views\SearchResult\TechSpecFilters.cshtml" />
