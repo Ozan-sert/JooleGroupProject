@@ -217,8 +217,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchResultController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -230,9 +228,7 @@
     <Compile Include="Models\SearchResultVM.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Models\ResultViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
-    <Compile Include="Models\TestVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +301,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -314,11 +309,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -345,27 +335,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Login2.cshtml" />
     <Content Include="Views\Shared\Background.cshtml" />
     <Content Include="Views\User\Signup.cshtml" />
-    <Content Include="Views\Shared\SearchBox.cshtml" />
-    <Content Include="Views\Shared\ProductLayout.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Search\SearchError.cshtml" />
-    <Content Include="Views\Search\ProductResult.cshtml" />
-    <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\SearchResult\Index.cshtml" />
-    <Content Include="Views\SearchResult\TechSpecFilters.cshtml" />
-    <Content Include="Views\SearchResult\ProducsInSubcategory.cshtml" />
-    <Content Include="Views\SearchResult\ProductsFilteredByModelYear.cshtml" />
     <Content Include="Views\SearchResult\_ProductListPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Product\Compare.cshtml" />
-    <Content Include="Views\Shared\Navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

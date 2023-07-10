@@ -4,10 +4,6 @@
     ViewBag.Title = "SearchResult";
 }
 
-@*@{
-    Layout = null;
-}*@
-
 
 
 <head>
@@ -112,13 +108,9 @@
     </div>
 </div>
 
-@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>*@
+
 <script src="http://kit.fontawesome.com/ada9f89ebf.js" crossorigin="anonymous"></script>
 <script src="http://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-@*@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryui")*@
 
 <script>
     $(document).ready(function () {
@@ -204,28 +196,16 @@
         var year1 = $('#year1').val();
         var year2 = $('#year2').val();
         var subCategoryID = @Model.SubCategoryID;
-        @*var filterValues = {};
-        for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
-            var key = $('#name_' + i).val();
-            var min = $('#a_' + i).val();
-            var max = $('#b_' + i).val();
-            filterValues[key] =  min+'-'+max;
-        }*@
-        //var techSpecFilters = [];
+   
         var attributeIDs = [];
         var filterValueStrings = [];
 
         for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
-            //try {
-            //    var techSpecFilter = JSON.parse($('#name_' + i).val()); // Convert string representation to JS object
-
-            //} catch (error) {
-            //    console.error("Failed to parse JSON:", $('#name_' + i).val(), error);
-            //}
+            
             var attributeID = $('#name_' + i).val();
             var valueString = $('#a_' + i).val() + '-' + $('#b_' + i).val();
             attributeIDs.push(attributeID);
-            //techSpecFilters.push(techSpecFilter);
+           
             filterValueStrings.push(valueString);
         }
         axios({

@@ -11,7 +11,7 @@
     display: inline-block;
     height: 90%;
     width: auto;
-    margin-right:1rem;
+    margin-left: 2rem;
 }
 
 .profile {
@@ -21,6 +21,7 @@
     border-radius: 50%;
     height: 90%;
     aspect-ratio: 1/1;
+    margin-right: 2rem;
 }
 
 form {

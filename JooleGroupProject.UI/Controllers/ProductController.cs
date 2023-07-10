@@ -22,6 +22,11 @@ namespace JooleGroupProject.UI.Models
             {
                 return HttpNotFound("Product not found.");
             }
+            var categories = Session["categories"] as IEnumerable<CategoryDTO>;
+            if (categories == null)
+            {
+                return HttpNotFound("categories not found in session.");
+            }
             return View(product);
         }
 

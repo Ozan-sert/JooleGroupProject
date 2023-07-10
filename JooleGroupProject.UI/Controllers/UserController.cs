@@ -12,7 +12,7 @@ namespace JooleGroupProject.UI.Controllers
 {
     public class UserController : Controller
     {
-        UserService myservice = new UserService();
+        UserService myService = new UserService();
 
         private readonly IMapper _mapper;
 
@@ -37,7 +37,7 @@ namespace JooleGroupProject.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO user = myservice.Login(loginUser.UsernameOrEmail, loginUser.Password);
+                UserDTO user = myService.Login(loginUser.UsernameOrEmail, loginUser.Password);
 
                 if (user == null)
                 {
@@ -64,10 +64,10 @@ namespace JooleGroupProject.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO userDTO = _mapper.Map<UserDTO>(registerUser); 
+                UserDTO userDTO = _mapper.Map<UserDTO>(registerUser);
                 // The submitted data is valid, you can process it here
                 // For example, save it to the database, send an email, etc.
-                myservice.RegisterUser(userDTO);
+                myService.RegisterUser(userDTO);
                 // After successful processing, you might want to redirect to a success page
                 return RedirectToAction("Login", "User");
             }

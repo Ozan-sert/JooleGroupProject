@@ -23,7 +23,19 @@ namespace JooleGroupProject.UI.Controllers
         // GET: SearchResult
         public ActionResult Index(string categoryName, string subCategoryName)
         {
+            if (string.IsNullOrEmpty(categoryName) || string.IsNullOrEmpty(subCategoryName))
+            {
+                // Redirect to the Error view with a custom error message
+                return HttpNotFound("Invalid category or subcategory name.");
+             
+            }
             SearchResultVM viewModel = new SearchResultVM();
+            var categories = Session["categories"] as IEnumerable<CategoryDTO>;
+
+            if (categories == null)
+            {
+                Session["categories"] = searchService.GetCategories();
+            }
             int subCategoryID = resultService.GetSubCategoryID(subCategoryName);
 
             viewModel.techSpecFilters = resultService.GetTechSpecFilterNamesForSubCategory(subCategoryID);
@@ -32,26 +44,27 @@ namespace JooleGroupProject.UI.Controllers
             viewModel.SubCategoryID = subCategoryID;
             viewModel.Products = resultService.GetProductsBySubCategory(subCategoryID);
             Session["products"] = viewModel.Products;
-            Session["categories"] = searchService.GetCategories();
-          
+           
+
             return View(viewModel);
         }
         [HttpPost]
         public ActionResult FilterProducts(string year1, string year2, List<int> attributeIDs, List<string> filterValueStrings, int subCategoryID)
         {
-            int y1 = (year1 == ""||year1 == "0") ? 1900: int.Parse(year1);
+            int y1 = (year1 == "" || year1 == "0") ? 1900 : int.Parse(year1);
             int y2 = (year2 == "" || year2 == "0") ? 2023 : int.Parse(year2);
             int subID = subCategoryID;
             //IEnumerable<ProductDTO> products = resultService.GetProductsFiltered(subID, y1, y2);
             IEnumerable<ProductDTO> products = Session["products"] as IEnumerable<ProductDTO>;
-            if(products ==null)
+            if (products == null)
             {
                 products = resultService.GetProductsFiltered(subID, y1, y2);
-            } else
+            }
+            else
             {
                 products = products.Where(p => p.ModelYear >= y1 && p.ModelYear <= y2).ToList();
             }
-            for(int i = 0; i < attributeIDs.Count;i++)
+            for (int i = 0; i < attributeIDs.Count; i++)
             {
                 int attributeID = attributeIDs[i];
                 var values = filterValueStrings[i].Split('-');
@@ -73,31 +86,7 @@ namespace JooleGroupProject.UI.Controllers
                 Products = products
             };
 
-            return PartialView("_ProductListPartial", viewModel.Products); 
+            return PartialView("_ProductListPartial", viewModel.Products);
         }
-
-
-
-        // Test Services:
-        public ActionResult TechSpecFilters(int subCategoryID)
-        {
-            SearchResultVM viewModel = new SearchResultVM();
-            viewModel.techSpecFilters = resultService.GetTechSpecFilterNamesForSubCategory(subCategoryID);
-            return View(viewModel.techSpecFilters);
-        }
-
-        public ActionResult ProducsInSubcategory(int subCategoryID)
-        {
-            SearchResultVM viewModel = new SearchResultVM();
-            viewModel.Products = resultService.GetProductsBySubCategory(subCategoryID);
-            return View(viewModel.Products);
-        }
-        public ActionResult ProductsFilteredByModelYear(int sub, int year1, int year2)
-        {
-            SearchResultVM viewModel = new SearchResultVM();
-            viewModel.Products = resultService.GetProductsFiltered(sub, year1, year2);
-            return View(viewModel.Products);
-        }
-   
     }
 }
