@@ -32,6 +32,8 @@ namespace JooleGroupProject.UI.Controllers
             viewModel.SubCategoryID = subCategoryID;
             viewModel.Products = resultService.GetProductsBySubCategory(subCategoryID);
             Session["products"] = viewModel.Products;
+            Session["categories"] = searchService.GetCategories();
+          
             return View(viewModel);
         }
         [HttpPost]

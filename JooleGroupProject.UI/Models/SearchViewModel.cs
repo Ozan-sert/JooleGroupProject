@@ -9,17 +9,17 @@ namespace JooleGroupProject.UI.Models
     public class SearchViewModel
     {
        
-        public int selectedCategoryID;
+        //public int selectedCategoryID;
 
-        public string selectedCategoryName;
+        //public string selectedCategoryName;
 
-        public int selectedSubCategoryID;
+        //public int selectedSubCategoryID;
 
-        public string selectedSubCategoryName; 
+        //public string selectedSubCategoryName; 
 
         public List<CategoryDTO> Categories { get; set; }
 
-        public List<SubCategoryDTO> SubCategories { get; set; } 
+        //public List<SubCategoryDTO> SubCategories { get; set; } 
 
 
     }

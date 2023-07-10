@@ -35,27 +35,27 @@ namespace JooleGroupProject.UI.Controllers
         {
             SearchViewModel searchViewModel = new SearchViewModel()
             {
-                selectedCategoryID = 1,
-                selectedCategoryName = "Mechanical",
+                //selectedCategoryID = 1,
+             
                 Categories = searchService.GetCategories(),
-                SubCategories = searchService.GetSubsforCategory(1),
+                //SubCategories = searchService.GetSubsforCategory(1),
             };
 
             return View("Index", searchViewModel);
         }
 
         [HttpPost]
-        public ActionResult selectCategory(string data = "1") { 
+        public ActionResult selectCategory(string data ) { 
             int categoryID = int.Parse(data);
-            string categoryName = searchService.GetCategoryNameByID(categoryID);
+           //  string categoryName = searchService.GetCategoryNameByID(categoryID);
 
-            SearchViewModel searchViewModel = new SearchViewModel()
-            {
-                selectedCategoryID = categoryID,
-                selectedCategoryName = categoryName,
-                Categories = searchService.GetCategories(),
-                SubCategories = searchService.GetSubsforCategory(categoryID)
-            };
+            //SearchViewModel searchViewModel = new SearchViewModel()
+            //{
+            //    selectedCategoryID = categoryID,
+           
+            //    Categories = searchService.GetCategories(),
+            //    SubCategories = searchService.GetSubsforCategory(categoryID)
+            //};
 
             var subs = searchService.GetSubsforCategory(categoryID);
             string[] tags = new string[subs.Count];
@@ -69,22 +69,22 @@ namespace JooleGroupProject.UI.Controllers
             return Json(new { tags });
         }
 
-        [HttpPost]
-        public ActionResult toResult(string data) {
-            var selectedSubCategory = searchService.GetSubCategoryByName(data);
-            SearchViewModel searchViewModel = new SearchViewModel() {
-                selectedSubCategoryName = data,
-                selectedSubCategoryID = selectedSubCategory.SubCategoryID,
-                selectedCategoryID = selectedSubCategory.CategoryID,
-                Categories = searchService.GetCategories(), 
-                SubCategories = searchService.GetSubsforCategory(selectedSubCategory.CategoryID),
-            };
+        //[HttpPost]
+        //public ActionResult toResult(string data) {
+        //    var selectedSubCategory = searchService.GetSubCategoryByName(data);
+        //    SearchViewModel searchViewModel = new SearchViewModel() {
+        //        selectedSubCategoryName = data,
+        //        selectedSubCategoryID = selectedSubCategory.SubCategoryID,
+        //        selectedCategoryID = selectedSubCategory.CategoryID,
+        //        Categories = searchService.GetCategories(), 
+        //        SubCategories = searchService.GetSubsforCategory(selectedSubCategory.CategoryID),
+        //    };
 
-            //string result = "/Search/ProductResult?subCategoryID=" + searchViewModel.selectedSubCategoryID + "&categoryName=1" + "&subCategoryName=" + searchViewModel.selectedSubCategoryName;
+        //    //string result = "/Search/ProductResult?subCategoryID=" + searchViewModel.selectedSubCategoryID + "&categoryName=1" + "&subCategoryName=" + searchViewModel.selectedSubCategoryName;
             
-            return Json(searchViewModel); 
+        //    return Json(searchViewModel); 
 
-        }
+        //}
 
        
         public ActionResult ProductResult(string result) {

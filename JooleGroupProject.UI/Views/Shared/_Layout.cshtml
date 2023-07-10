@@ -1,39 +1,114 @@
-﻿<!DOCTYPE html>
+﻿@using JooleGroupProject.ServiceLayer.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    @*<title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    @Styles.Render("~/Content/layout.css")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/jqueryuicss")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="http://kit.fontawesome.com/ada9f89ebf.js" crossorigin="anonymous"></script>
+    <script src="http://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body  >
+    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+
+    <div class="navbar">
+        <img src="~/Content/Resources/joole-logo.png" class="image" />
+        <form>
+       
+                <select id="categorySelector" >
+                    @foreach (var category in (List<CategoryDTO>)Session["categories"])
+                    {
+                        <option value=@category.CategoryID style="background-color: white; font-size:100%;" @(category.CategoryID == 1 ? "selected" : "")>@category.CategoryName</option>
+                    }
+                </select>
+             
+                <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
+
+                <button id="search" class="searchButton" type="button">
+                    <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+                </button>
+
+        </form>
+        <img class="profile" />
+    </div>
+    <div class="container body-content"style="margin-top:2%">
+        @RenderBody()
+
+    </div>
+    <script>
+      
+        $(document).ready(function () {
+            $("#categorySelector").on("change", function () {
+                var selectedOption = $(this).val();
+                updateAutocompleteSource(selectedOption);
+            });
+        });
+
+        function updateAutocompleteSource(selectedOption) {
+            axios.post("/Search/selectCategory", { data: selectedOption })
+                .then(function (response) {
+                    console.log("success");
+
+                    var autocompleteSource = response.data.tags;
+
+                    console.log("data: " + response.data.tags);
+
+                    $("#subcategorySelector").autocomplete({
+                        source: autocompleteSource
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error:", error);
+                });
+        }
+        $(document).ready(function () {
+            var selectedOption = $("#categorySelector").val();
+             updateAutocompleteSource(selectedOption);
+        });
+
+        document.getElementById("search").addEventListener("click", function () {
+
+            var selectedCategoryName = $("#categorySelector option:selected").text(); // Get the selected category name
+            //subcategory name
+            var selectedSubCategory = document.getElementById("subcategorySelector").value;
+
+            console.log(selectedCategoryName);
+            console.log(selectedSubCategory);
+
+            // Construct the URL with parameters
+            var destinationURL = "/SearchResult/Index" +
+                "?categoryName=" + encodeURIComponent(selectedCategoryName) +
+                "&subCategoryName=" + encodeURIComponent(selectedSubCategory);
+
+            // Redirect to the new URL
+            window.location.href = destinationURL;
+
+        })
+    </script>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

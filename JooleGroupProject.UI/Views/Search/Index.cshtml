@@ -11,13 +11,13 @@
     <div style="width: 60%; margin: 0 20% 0 20%; text-align: center">
         <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
         <p style="font-size: 18px">Building Product Selection Platform</p>
-        <div style="display: inline-block">
+        <div style="display: inline-block; align-content:center;">
             @*@Html.Partial("SearchBox", Model)*@
             <form>
                 <select id="categorySelector">
                     @foreach (var category in @Model.Categories)
                     {
-                        <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
+                        <option value=@category.CategoryID style="background-color: white"  @(category.CategoryID == 1 ? "selected" : "")>@category.CategoryName</option>
                     }
                 </select>
 
@@ -116,21 +116,7 @@
         }
         $(document).ready(function () {
             var selectedOption = $("#categorySelector").val();
-            axios.post("/Search/selectCategory", { data: selectedOption })
-                .then(function (response) {
-                    console.log("success");
-
-                    var autocompleteSource = response.data.tags;
-
-                    console.log("data: " + response.data.tags);
-
-                    $("#subcategorySelector").autocomplete({
-                        source: autocompleteSource
-                    });
-                })
-                .catch(function (error) {
-                    console.log("Error:", error);
-                });
+             updateAutocompleteSource(selectedOption);
         });
 
         document.getElementById("search").addEventListener("click", function () {
