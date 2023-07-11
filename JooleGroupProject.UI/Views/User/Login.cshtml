@@ -69,32 +69,6 @@
     <div style="width: 60%; margin: 0 20% 0 20%; text-align: center; margin-top: 10%">
         <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
         <p style="font-size: 18px">Building Product Selection Platform</p>
-        @*<form action="User/Login" method="post">
-            <div class="field">
-                <input class="field-input" name="UsernameOrEmail" placeholder="Username or Email" type="text" />
-                <div class="icon">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-            </div>
-            <br />
-            <div class="field">
-                <input class="field-input" name="Password" placeholder="Password" type="password" />
-                <div class="icon">
-                    <i class="fa-solid fa-key"></i>
-                </div>
-            </div>
-            <br />
-            <input class="login-button" type="submit" value="Log In" />
-            <br />
-            <div class="error">
-                @Html.ValidationSummary()
-            </div>
-            @if(ViewBag.LoginError) {
-                <div class="error">
-                    @ViewBag.LoginMessage
-                </div>
-            }
-        </form>*@
         @using (Html.BeginForm("Login", "User", FormMethod.Post))
         {
             <div class="field">
@@ -123,7 +97,7 @@
             <div class="error">
                 @ViewBag.LoginMessage
             </div>
-        }
+        }Z
     </div>
 </div>
 
