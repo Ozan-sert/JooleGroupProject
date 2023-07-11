@@ -87,7 +87,6 @@ namespace JooleGroupProject.UI.Controllers
                 // The submitted data is not valid, so return the user back to the form with errors
                 return View("Signup"); // Replace "YourFormViewName" with the actual name of your form view
             }
-            //return View();
         }
 
     }

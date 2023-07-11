@@ -8,8 +8,7 @@ namespace JooleGroupProject.UI.Models
 {
     public class RegisterViewModel
     {
-        //public int UserID { get; set; }
-
+      
         [Required(ErrorMessage = "User Name Required")]
         public string UserName { get; set; }
 

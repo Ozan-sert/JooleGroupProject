@@ -10,12 +10,6 @@ namespace JooleGroupProject.DAL.Models
 {
     public class Product
     {
-        //public Product()
-        //{
-        //    AttributeValues = new HashSet<AttributeValue>();
-        //}
-
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductID { get; set; }
 
         public int SubCategoryID { get; set; }

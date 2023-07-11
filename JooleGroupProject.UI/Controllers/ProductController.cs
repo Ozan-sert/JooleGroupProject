@@ -58,7 +58,6 @@ namespace JooleGroupProject.UI.Models
             viewModel.Products = products;
             viewModel.CategoryName = categoryName;
             viewModel.SubCategoryName = subcategoryName;
-            // get subcategory name
 
             return View(viewModel);
         }

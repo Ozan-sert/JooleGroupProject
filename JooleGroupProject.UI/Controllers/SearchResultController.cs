@@ -54,7 +54,7 @@ namespace JooleGroupProject.UI.Controllers
             int y1 = (year1 == "" || year1 == "0") ? 1900 : int.Parse(year1);
             int y2 = (year2 == "" || year2 == "0") ? 2023 : int.Parse(year2);
             int subID = subCategoryID;
-            //IEnumerable<ProductDTO> products = resultService.GetProductsFiltered(subID, y1, y2);
+
             IEnumerable<ProductDTO> products = Session["products"] as IEnumerable<ProductDTO>;
             if (products == null)
             {
@@ -77,8 +77,6 @@ namespace JooleGroupProject.UI.Controllers
                     return attributeValue >= min && attributeValue <= max;
                 }).ToList();
             }
-
-
 
             ProductListVM viewModel = new ProductListVM
             {

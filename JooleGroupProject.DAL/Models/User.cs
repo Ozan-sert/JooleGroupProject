@@ -10,7 +10,6 @@ namespace JooleGroupProject.DAL.Models
 {
     public class User
     {
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserID { get; set; }
 
         //[Required]
