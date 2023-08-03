@@ -16,10 +16,6 @@ namespace JooleGroupProject.DAL.Interfaces
 
         void Update(TEntity entity);
 
-        void InsertRange(IEnumerable<TEntity> entities);
-
-        void DeleteRange(IEnumerable<TEntity> entities);
-
         IEnumerable<TEntity> GetAll();
     }
 }

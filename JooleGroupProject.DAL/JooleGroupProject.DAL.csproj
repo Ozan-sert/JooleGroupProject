@@ -45,8 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAttributeRepo.cs" />
+    <Compile Include="Interfaces\ICategoryRepo.cs" />
     <Compile Include="Interfaces\IGenericRepo.cs" />
+    <Compile Include="Interfaces\IProductAttributeRepo.cs" />
     <Compile Include="Interfaces\IProductRepo.cs" />
+    <Compile Include="Interfaces\ISubCategoryRepo.cs" />
+    <Compile Include="Interfaces\ITechSpecFilterRepo.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUserRepo.cs" />
     <Compile Include="Models\Attribute.cs" />
