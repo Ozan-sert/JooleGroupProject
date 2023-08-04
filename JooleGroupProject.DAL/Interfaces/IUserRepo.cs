@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IUserRepo : IGenericRepo<User>
+    public interface IUserRepo: IGenericRepo<User>
     {
+        User GetUserByID(int id);
+
+        // when login ==> get the password
+        User GetUserByName(string name);
+
+        void AddUser(User user); 
     }
 }

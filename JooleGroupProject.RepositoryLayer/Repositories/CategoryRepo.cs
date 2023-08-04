@@ -14,5 +14,14 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
 
         }
+
+        public IEnumerable<Category> GetCategories() {
+            return this.GetAll(); 
+        } 
+
+        public Category GetCategory(int id)
+        {
+            return this.GetByID(id);
+        }
     }
 }

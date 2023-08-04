@@ -34,7 +34,7 @@ namespace JooleGroupProject.ServiceLayer.Services
 
         public UserDTO GetUserByID(int id)
         {
-            var user = _unitOfWork.UserRepo.GetByID(id);
+            var user = _unitOfWork.UserRepo.GetUserByID(id);
             if (user == null)
             {
                 return null;
@@ -46,7 +46,7 @@ namespace JooleGroupProject.ServiceLayer.Services
         public void CreateUser(UserDTO userDTO)
         {
             var user = _mapper.Map<User>(userDTO);
-            _unitOfWork.UserRepo.Insert(user);
+            _unitOfWork.UserRepo.AddUser(user);
             _unitOfWork.Save();
         }
 
