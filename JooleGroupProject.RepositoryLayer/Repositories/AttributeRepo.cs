@@ -8,26 +8,30 @@ using JooleGroupProject.DAL.Models;
 
 namespace JooleGroupProject.RepositoryLayer.Repositories
 {
-    public class AttributeRepo : GenericRepo<Attribute>, IAttributeRepo
+    public class AttributeRepo : GenericRepo<JooleGroupProject.DAL.Models.Attribute>, IAttributeRepo
     {
         public AttributeRepo(MyDBContext _dbcontext) : base(_dbcontext)
         {
 
         }
-        public Attribute GetAttribute(int id)
+        public JooleGroupProject.DAL.Models.Attribute GetAttribute(int id)
         {
             return this.GetByID(id);
         }
 
-        public IEnumerable<Attribute> GetAttributes()
+        public IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributes()
         {
             return this.GetAll();
         }
         
-        public IEnumerable<Attribute> GetAttributesByTechSpec()
+        public IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributesByTechSpec()
         {
             return this.GetMany(x => x.IsTechSpec == true);
         }
-
+        public IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributesByType()
+        {
+            return this.GetMany(x => x.IsType == true);
+        }
+        
     }
 }

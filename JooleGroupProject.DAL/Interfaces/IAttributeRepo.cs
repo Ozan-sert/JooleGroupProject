@@ -11,5 +11,6 @@ namespace JooleGroupProject.DAL.Interfaces
         JooleGroupProject.DAL.Models.Attribute GetAttribute(int id);
         IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributes();
         IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributesByTechSpec();
+        IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributesByType();
     }
 }

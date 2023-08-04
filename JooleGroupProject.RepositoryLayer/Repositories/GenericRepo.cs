@@ -23,7 +23,10 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
             return _dbContext.Set<TEntity>().Find(id);
         }
 
-        
+        public TEntity Get(Expression<Func<TEntity, bool>> where)
+        {
+            return _dbContext.Set<TEntity>().Where(where).FirstOrDefault();
+        }
 
         public void Insert(TEntity entity)
         {
@@ -46,9 +49,9 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
             return _dbContext.Set<TEntity>().ToList();
         }
 
-        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        public IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where)
         {
-            return entities.Where(where).ToList();
+            return _dbContext.Set<TEntity>().Where(where).ToList();
         }
     }
 }
