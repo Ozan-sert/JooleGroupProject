@@ -9,5 +9,14 @@ namespace JooleGroupProject.DAL.Interfaces
 {
     public interface IProductRepo : IGenericRepo<Product> 
     {
+        Product GetProduct(int id);
+
+        IEnumerable<Product> GetProductsBySubCategory(int id);
+
+        //public IEnumerable<Product> GetProducts()
+
+
+        IEnumerable<Product> GetProductsByModelYear(int year1, int year2);
+
     }
 }

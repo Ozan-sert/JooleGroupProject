@@ -32,6 +32,8 @@ namespace JooleGroupProject.DAL.Models
         //[StringLength(100)]
         public string Manufacturer { get; set; }
 
+        public int ModelYear { get; set; }
+
         //[Required]
         //[StringLength(100)]
         public string Series { get; set; }
