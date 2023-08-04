@@ -50,7 +50,5 @@ namespace JooleGroupProject.ServiceLayer.Services
             _unitOfWork.Save();
         }
 
-
-
     }
 }
