@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface IAttributeRepo : IGenericRepo<Attribute>
+    public interface IAttributeRepo 
     {
+        JooleGroupProject.DAL.Models.Attribute GetAttribute(int id);
+        IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributes();
+        IEnumerable<JooleGroupProject.DAL.Models.Attribute> GetAttributesByTechSpec();
     }
 }

@@ -7,7 +7,8 @@ using JooleGroupProject.DAL.Models;
 
 namespace JooleGroupProject.DAL.Interfaces
 {
-    public interface ITechSpecFilterRepo:IGenericRepo<TechSpecFilter> 
+    public interface ITechSpecFilterRepo
     {
+        List<TechSpecFilter> GetGeneralTechSpecAttributesBySubCategory(int sub);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
             return _dbContext.Set<TEntity>().Find(id);
         }
+
+        
 
         public void Insert(TEntity entity)
         {
@@ -43,5 +46,9 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
             return _dbContext.Set<TEntity>().ToList();
         }
 
+        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        {
+            return entities.Where(where).ToList();
+        }
     }
 }

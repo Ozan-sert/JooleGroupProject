@@ -14,5 +14,10 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
         {
 
         }
+        public List<TechSpecFilter> GetGeneralTechSpecAttributesBySubCategory(int sub)
+        {
+            return this.GetMany(x => x.SubCategoryID == sub).ToList();
+        }
+
     }
 }
