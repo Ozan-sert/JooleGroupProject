@@ -1,0 +1,42 @@
+﻿
+.filter {
+    background: #f8f8f8;
+    border: 1px solid gray;
+}
+
+.filter-item {
+    border-bottom: 1px solid gray;
+}
+
+    .filter-item button {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #7cbddc;
+        color: white;
+        border: none;
+    }
+
+    .filter-item p, .slider-label p {
+        margin: 0;
+        padding: 0;
+    }
+
+.filter-toggle p {
+    margin: 0;
+    padding: 0;
+}
+
+.filter input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
