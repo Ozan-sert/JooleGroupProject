@@ -14,6 +14,8 @@ namespace JooleGroupProject.DAL.Interfaces
         // when login ==> get the password
         User GetUserByName(string name);
 
+        User GetUserByEmail(string email); 
+
         void AddUser(User user); 
     }
 }

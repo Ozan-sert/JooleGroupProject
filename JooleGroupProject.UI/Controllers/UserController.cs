@@ -16,6 +16,12 @@ namespace JooleGroupProject.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Signup() 
+        {
+            return View();
+        }
+
         // Post: User
         [HttpPost]
         public ActionResult Submit(UserDTO user)
@@ -28,12 +34,12 @@ namespace JooleGroupProject.UI.Controllers
                 // For example, save it to the database, send an email, etc.
                 myservice.RegisterUser(user);
                 // After successful processing, you might want to redirect to a success page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
             else
             {
                 // The submitted data is not valid, so return the user back to the form with errors
-                return View("YourFormViewName", user); // Replace "YourFormViewName" with the actual name of your form view
+                return View("Signup"); // Replace "YourFormViewName" with the actual name of your form view
             }
             //return View();
         }

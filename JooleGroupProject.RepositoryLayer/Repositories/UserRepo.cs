@@ -22,6 +22,10 @@ namespace JooleGroupProject.RepositoryLayer.Repositories
             return Get(x => x.UserName == name); 
         }
 
+        public User GetUserByEmail(string email) {
+            return Get(x => x.EmailAddress == email); 
+        }
+
         public void AddUser(User user) {
             if (user == null)
             {
