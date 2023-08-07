@@ -8,20 +8,20 @@
     border-bottom: 1px solid gray;
 }
 
-    .filter-item button {
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        background-color: #7cbddc;
-        color: white;
-        border: none;
-    }
+.filter-item button {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #7cbddc;
+    color: white;
+    border: none;
+}
 
-    .filter-item p, .slider-label p {
-        margin: 0;
-        padding: 0;
-    }
+.filter-item p, .slider-label p {
+    margin: 0;
+    padding: 0;
+}
 
 .filter-toggle p {
     margin: 0;
@@ -32,7 +32,27 @@
     box-sizing: border-box;
     width: 100%;
 }
+.slider input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center; 
+    border:0;
 
+}
+
+.slider .ui-slider-handle {
+    background: #f8f8f8;
+    border-radius:50%;
+}
+
+.slider .ui-widget-header {
+    background: #f8f8f8;
+}
+.slider-item {
+    margin:0;
+    padding:0;
+    height:1px;
+}
 .clickable {
     cursor: pointer;
 }

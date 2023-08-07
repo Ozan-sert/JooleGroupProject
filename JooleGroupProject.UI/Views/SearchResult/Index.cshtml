@@ -9,9 +9,9 @@
 }
 <head>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/searchResult.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/searchResult.css" rel="stylesheet" />
 </head>
 <div>Header</div>
 
@@ -57,29 +57,56 @@
             <div class="col-3 p-2 d-flex justify-content-center align-items-center"> <i class="fas fa-caret-down fa-2x"></i></div>
         </div>
 
-        <div class="slider-label row">
-            <div class="col-3 py-3 d-flex justify-content-center align-items-center">
-                <i class="fa-solid fa-right-left"></i>
-            </div>
-            <div class="col-9 d-flex justify-content-start align-items-center" style="padding-left:0px;" >
-                <p>Airflow(CFM)</p>
-            </div>
-           
-        </div>
+        <div id="tech-spec">
 
-        <div class="filter-item row">
-            <div class="col-3 d-flex justify-content-center align-items-center">
-                <input type="text" id="a" readonly style="border:0; ">
-            </div>
-            <div  class="col-9 d-flex justify-content-start align-items-center" style="padding-left:20px;" id="slider-range"></div>
-            <div class="col-3">
-                <input type="text" id="b" readonly style="border:0; ">
-            </div>
-        </div>
+            @if (Model != null)
+            {
+                var techSpecList = Model.techSpecFilters;
+                int i = 0;
+                foreach (var filter in techSpecList)
+                {
+                    <div class="slider-label row">
+                        <div class="col-3 py-3 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-right-left"></i>
+                        </div>
+                        <div class="col-9 d-flex justify-content-start align-items-center" style="padding-left:0px;">
+                            <p>@filter.AttributeName</p>
+                        </div>
 
+                    </div>
+
+                    <div class="slider row d-flex align-items-center">
+                        <div class="col-3  py-1">
+                            <input type="text" id="a_@i" readonly>
+                        </div>
+                        <div class="slider-item col-6 d-flex justify-content-center align-items-center" style="padding-left:20px;" id="slider-range_@i" data-min="@filter.MinValue" data-max="@filter.MaxValue"></div>
+                        <div class="col-3 py-1">
+                            <input type="text" id="b_@i" readonly>
+                        </div>
+                    </div>
+                    i++;
+                }
+            }
+
+        </div>
     </div>
     <div class="col-9">
         <!-- Products list goes here -->
+        @if (Model != null)
+        {
+            <div><p><strong>@Model.CategoryName > </strong>@Model.SubCategoryName</p></div>
+            <div class="row">
+                @{ 
+                    var productList = Model.Products;
+                    foreach(var product in productList)
+                {
+                    <div class="col-3 table-bordered text-center">
+                        <img id="pimg_@product.ProductID"/>
+                    </div>
+                }
+                }
+            </div>
+         }
     </div>
 </div>
 
@@ -100,49 +127,40 @@
                 $('#product-type').css('border-bottom', '1px solid gray');
             }
         });
-    });
-
-    @*$(document).ready(function () {
         $('#product-tech').click(function () {
-            for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
-                createSlider(i);
-            }
-
-            if ($('#product-tech').css('display') == 'none') {
+            $('#tech-spec').toggle();
+            if ($('#tech-spec').css('display') == 'none') {
                 $('#product-tech').css('border-bottom', 'none');
             }
             else {
                 $('#product-tech').css('border-bottom', '1px solid gray');
             }
-        });
-    }*@
-
-    $(function () {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [75, 300],
-            slide: function (event, ui) {
-                $("#a").val(ui.values[0]);
-                $("#b").val(ui.values[1]);
+        })
+        $(function () {
+            var cnt = @Model.techSpecFilters.Count();
+            for (var i = 0; i < cnt; i++) {
+                createSlider(i);
             }
         });
-        $("#a").val($("#slider-range").slider("values", 0));
-        $("#b").val($("#slider-range").slider("values", 1));
+        function createSlider(i) {
+            var minValue = parseInt($("#slider-range_" + i).data('min'));
+            var maxValue = parseInt($("#slider-range_" + i).data('max'));
+            $("#slider-range_" + i).slider({
+                range: true,
+                min: minValue,
+                max: maxValue,
+                values: [minValue, maxValue],
+                slide: function (event, ui) {
+                    $("#a_" + i).val(ui.values[0]);
+                    $("#b_" + i).val(ui.values[1]);
+                }
+            });
+            $('#a_' + i).val(minValue);
+            $('#b_' + i).val(maxValue);
+        }
     });
 
-    //function createSlider(i) {
-    //    $("#slider").slider({
-    //        range: true,
-    //        min: ,
-    //        max: 500,
-    //        values: [75, 300],
-    //        slide: function (event, ui) {
-    //            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-    //        }
-    //    });
-    //    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-    //        " - $" + $("#slider-range").slider("values", 1));
-    //}
+
+
+
 </script>

@@ -191,13 +191,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\Background.cshtml" />
     <Content Include="Views\User\Signup.cshtml" />
     <Content Include="Views\SearchResult\Index.cshtml" />
+    <Content Include="Views\SearchResult\TechSpecFilters.cshtml" />
+    <Content Include="Views\SearchResult\ProducsInSubcategory.cshtml" />
+    <Content Include="Views\SearchResult\ProductsFilteredByModelYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
