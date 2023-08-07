@@ -33,18 +33,25 @@ namespace JooleGroupProject.ServiceLayer.Services
             _mapper = config.CreateMapper();
         }
 
-      
-        public UserDTO Login(UserDTO newuser)
 
+        public UserDTO Login(String UsernameOrEmail, String Password)
         {
-
-            var username = newuser.UserName;
-            var user = _unitOfWork.UserRepo.GetUserByName(username);
-
-            // Check if the user exists and if the provided password is correct
-            if (user != null && user.Password == newuser.Password)
+            // Email Address
+            if (UsernameOrEmail.Contains("@"))
             {
-                return _mapper.Map<UserDTO>(user);
+                var user = _unitOfWork.UserRepo.GetUserByEmail(UsernameOrEmail);
+                if (user != null && user.Password.Equals(Password))
+                {
+                    return _mapper.Map<UserDTO>(user); 
+                }
+            }
+            // User Name
+            else {
+                var user = _unitOfWork.UserRepo.GetUserByName(UsernameOrEmail);
+                if (user != null && user.Password.Equals(Password))
+                {
+                    return _mapper.Map<UserDTO>(user);
+                }
             }
 
             return null; // Authentication failed

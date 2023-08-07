@@ -1,13 +1,105 @@
-﻿@model JooleGroupProject.ServiceLayer.Models.UserDTO
+﻿@model JooleGroupProject.UI.Models.LoginViewModel
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Background.cshtml"; 
 }
 
-<h2>Login</h2>
-<form action="Login" method="post">
-    Username: <input name="username" id="Text1" type="text" />
-    Password: <input name="password" id="Password1" type="password" />"text" />
-    <input id="Button1" type="submit" value="button" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+    <style>
+        .icon {
+            height: 25px; 
+            width: 25px; 
+            text-align: center; 
+            display: inline-block; 
+            margin-left: -30px; 
+        }
 
-</form>
+        .field-input {
+            width: 50%; 
+            height: 25px; 
+            border-radius: 5%;
+            outline: none; 
+            border: 1px solid white; 
+        }
+
+        .field {
+            text-align: center;
+            border: none;
+            height: 30px;
+        }
+
+        .login-button {
+            margin-left: 35%;
+            width: 8%;
+            height: 25px;
+            background-color: #357AB5;
+            border: none; 
+            border-radius: 5%; 
+            color: white; 
+        } 
+
+        .login-button:active {
+            border: 2px solid white; 
+        }
+
+        .signup-link {
+            text-decoration: none; 
+            margin-left: 80%; 
+            color: black; 
+        }
+
+        .signup-link:active{
+            color: white; 
+        }
+
+        .error {
+            width: 50%; 
+            margin-left: 25%;
+            font-size: 16px;
+            color: red; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class="signup-link" })
+
+        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center">
+            <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
+            <p style="font-size: 18px">Building Product Selection Platform</p>
+            <form action="Login" method="post">
+                <div class="field">
+                    <input class="field-input" name="UsernameOrEmail" placeholder="Username or Email" type="text" />
+                    <div class="icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+                <br />
+                <div class="field">
+                    <input class="field-input" name="Password" placeholder="Password" type="password" />
+                    <div class="icon">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                </div>
+                <br />
+                <input class="login-button" type="submit" value="Log In" />
+                <br />
+                <div class="error">
+                    @Html.ValidationSummary()
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body> 
+</html>
+
+
+
