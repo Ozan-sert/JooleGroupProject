@@ -41,7 +41,7 @@ namespace JooleGroupProject.ServiceLayer.Services
             return _mapper.Map<List<ProductDTO>>(products);
         }
 
-        public List<TechSpecFilterDTO> getTechSpecFilterNamesForSubCategory(int sub)
+        public List<TechSpecFilterDTO> GetTechSpecFilterNamesForSubCategory(int sub)
         {
             IEnumerable<Attribute> propertyList = _unitOfWork.AttributeRepo.GetAll();
             IEnumerable<TechSpecFilter> specFilterList = _unitOfWork.TechSpecFilterRepo.GetMany(x => x.SubCategoryID == sub);
@@ -53,9 +53,11 @@ namespace JooleGroupProject.ServiceLayer.Services
             List<TechSpecFilterDTO> techSpecFilters = _mapper.Map<List<TechSpecFilterDTO>>(results);
             return techSpecFilters.ToList();
         }
-        public IEnumerable<Product> GetProductsFiltered(int sub, int year1, int year2)
+        public IEnumerable<ProductDTO> GetProductsFiltered(int sub, int year1, int year2)
         {
-            return _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == sub && (x.ModelYear >= year1 && x.ModelYear <= year2)).ToList();
+            var products = _unitOfWork.ProductRepo.GetMany(x => x.SubCategoryID == sub && (x.ModelYear >= year1 && x.ModelYear <= year2));
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
         }
+
     }
 }
