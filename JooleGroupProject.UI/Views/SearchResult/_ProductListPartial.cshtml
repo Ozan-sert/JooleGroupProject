@@ -1,0 +1,32 @@
+﻿@model IEnumerable<JooleGroupProject.ServiceLayer.Models.ProductDTO>
+
+@foreach (var product in Model)
+{
+    <div class="product-card col-3 text-center ">
+        <div class="product mx-2 ">
+            <div class="product-img">
+                <img id="pimg_@product.ProductID" alt="@product.ProductName" src="~/Content/images/pimg_@(product.ProductID).jpg" />
+            </div>
+            <div class="basic-detail">
+                <p>
+                    <strong>
+                        @product.Manufacturer <br />
+                        @product.Series<br />
+                        @product.Model<br />
+                    </strong>
+                </p>
+            </div>
+            <div class="tech-detail">
+                <p>
+                    TODO: get attributes by product id<br />
+                    @product.Manufacturer <br />
+                    @product.Series<br />
+                    @product.Model<br />
+            </div>
+            <div>
+                <label><strong>Compare:</strong></label>
+                <input type="checkbox" name="product" id="check_@product.ProductID" />
+            </div>
+        </div>
+    </div>
+}

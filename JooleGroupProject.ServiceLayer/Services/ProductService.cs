@@ -28,7 +28,10 @@ namespace JooleGroupProject.ServiceLayer.Services
             var config = new MapperConfiguration(cfg =>   // AutoMapper Configuration
             {
                 cfg.CreateMap<Product, ProductDTO>();
+                cfg.CreateMap<ProductAttribute, ProductAttributeDTO>()
+                .ForMember(dest => dest.AttributeName, opt => opt.MapFrom(src => src.Attribute.AttributeName));
             });
+
 
             _mapper = config.CreateMapper();
         }
@@ -44,14 +47,18 @@ namespace JooleGroupProject.ServiceLayer.Services
             return _mapper.Map<ProductDTO>(product);
         }
     
-
-     
-    
+        
 
         public ProductDTO GetProductByName(string name)
         {
             var product = _unitOfWork.ProductRepo.Get(x => x.ProductName == name);
             return _mapper.Map<ProductDTO>(product);
+        }
+
+        public int GetTechSpecValueForProduct(int productID, int attributeID)
+        {
+            var productAttribute = _unitOfWork.ProductAttributeRepo.Get(pa => pa.ProductID == productID && pa.AttributeID == attributeID);
+            return int.Parse(productAttribute.AttributeValue);
         }
     }
     
