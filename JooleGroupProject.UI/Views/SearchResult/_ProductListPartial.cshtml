@@ -19,11 +19,25 @@
                 </div>
                 <div class="tech-detail">
                     <p>
-                        @product.Attributes[0].IsTechSpec == true
-                        TODO: get attributes by product id<br />
-                        @product.Attributes[0].AttributeValue <br />
-                        @product.Attributes[1].AttributeName <br />
-                        @product.Attributes[2].AttributeName <br />
+                        @{ 
+                             var attributeList = product.Attributes.Where(a => a.IsTechSpec == true).ToList();
+                             int cnt = 0;
+                        }
+                        @{                           
+                            foreach (var attribute in attributeList)
+                            {
+                                if (cnt >= 4) {
+                                    break;
+                                }
+                                <text>
+                                @attribute.AttributeName: 
+                                @attribute.AttributeValue<br />
+                                </text>        
+                                cnt++;
+                            }
+                        }
+                     </p>
+
 </div>
             </div>
             <div>
