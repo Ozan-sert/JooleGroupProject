@@ -4,24 +4,26 @@
 {
     <div class="product-card col-3 text-center ">
         <div class="product mx-2 ">
-            <div class="product-img">
-                <img id="pimg_@product.ProductID" alt="@product.ProductName" src="~/Content/images/pimg_@(product.ProductID).jpg" />
-            </div>
-            <div class="basic-detail">
-                <p>
-                    <strong>
+            <div class="clickable link-to-detail"  data-url="@Url.Action("Detail", "Product", new { id = product.ProductID,subCategoryId= product.SubCategoryID })">
+                <div class="product-img">
+                    <img id="pimg_@product.ProductID" alt="@product.ProductName" src="~/Content/images/pimg_@(product.ProductID).jpg" />
+                </div>
+                <div class="basic-detail">
+                    <p>
+                        <strong>
+                            @product.Manufacturer <br />
+                            @product.Series<br />
+                            @product.Model<br />
+                        </strong>
+                    </p>
+                </div>
+                <div class="tech-detail">
+                    <p>
+                        TODO: get attributes by product id<br />
                         @product.Manufacturer <br />
                         @product.Series<br />
                         @product.Model<br />
-                    </strong>
-                </p>
-            </div>
-            <div class="tech-detail">
-                <p>
-                    TODO: get attributes by product id<br />
-                    @product.Manufacturer <br />
-                    @product.Series<br />
-                    @product.Model<br />
+                </div>
             </div>
             <div>
                 <label><strong>Compare:</strong></label>

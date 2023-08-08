@@ -75,7 +75,7 @@
                             </div>
 
                         </div>
-                        <input id="name_@i" type="hidden" value='@Html.Raw(Json.Encode(Model.techSpecFilters[i]))' />
+                        <input id="name_@i" type="hidden" @*value='@Html.Raw(Json.Encode(Model.techSpecFilters[i]))'*@ value="@Model.techSpecFilters[i].AttributeID" />
                         <div class="slider row d-flex align-items-center">
                             <div class="col-3  py-1">
                                 <input type="text" id="a_@i" readonly>
@@ -98,44 +98,11 @@
         {
             <div>
                 <p style="display:inline-block;"><strong>@Model.CategoryName > </strong>@Model.SubCategoryName </p> 
-                <button onclick="compare()" style="display:inline-bloc;margin-right:30px; float:right;">Compare</button>
+                <button id="compareButton" style="display:inline-block;margin-right:30px; float:right;">Compare</button>
             </div>
 
             <div class="row" id="product-list">
                 @Html.Partial("_ProductListPartial", Model.Products);
-                @*@{
-                    var productList = Model.Products.ToList();
-                    foreach (var product in productList)
-                    {
-                        <div class="product-card col-3 text-center ">
-                            <div class="product mx-2 ">
-                                <div class="product-img">
-                                    <img id="pimg_@product.ProductID" alt="@product.ProductName" src="~/Content/images/pimg_@(product.ProductID).jpg" />
-                                </div>
-                                <div class="basic-detail">
-                                    <p>
-                                        <strong>
-                                            @product.Manufacturer <br />
-                                            @product.Series<br />
-                                            @product.Model<br />
-                                        </strong>
-                                    </p>
-                                </div>
-                                <div class="tech-detail">
-                                    <p>
-                                            TODO: get attributes by product id<br />
-                                            @product.Manufacturer <br />
-                                            @product.Series<br />
-                                            @product.Model<br />
-                                </div>
-                                <div>
-                                    <label><strong>Compare:</strong></label>
-                                    <input type="checkbox" name="product" id="check_@product.ProductID" />
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }*@
             </div>
         }
     </div>
@@ -146,6 +113,7 @@
 <script src="https://kit.fontawesome.com/ada9f89ebf.js" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
+        console.log("Document ready start");
         $('#product-type').click(function () {
             $('#model-year').toggle();
 
@@ -166,15 +134,42 @@
             else {
                 $('#product-tech').css('border-bottom', '1px solid gray');
             }
-        })
-        $(function () {
-            var cnt = @Model.techSpecFilters.Count();
-            for (var i = 0; i < cnt; i++) {
-                createSlider(i);
+        });
+        var cnt = @Model.techSpecFilters.Count();
+        for (var i = 0; i < cnt; i++) {
+             console.log("redirected to detial!"); 
+            createSlider(i);
+        }
+
+        $(document).on('click', '.link-to-detail', function () {
+
+            console.log("redirected to detial!"); 
+            var url = $(this).data('url');
+            window.location.href = url;
+        });
+        $(document).on('change', "input[name='product']", function () {
+            console.log("checkbox changed!"); 
+            var checkedBoxesCount = $("input[name='product']:checked").length;
+            if (checkedBoxesCount > 3) {
+                alert("At most, you can select three products for comparison! ");
+                $(this).prop('checked', false);
+                return;
             }
         });
-
-   });
+        $(document).on('click', "#compareButton", function () {
+            console.log("Button clicked!"); 
+            var selectedProductIds = [];
+            $("input[name='product']:checked").each(function () {
+                selectedProductIds.push($(this).attr('id').split('_')[1]);
+            });
+            if (selectedProductIds.length < 2) {
+                alert("At least, you need to select two products for comparison!");
+                return;
+            }
+            window.location.href = "/ProductController/CompareView?productIds=" + selectedProductIds.join(',');
+        });
+        console.log("Document ready end");
+    });
 
    function createSlider(i) {
             var minValue = parseInt($("#slider-range_" + i).data('min'));
@@ -193,52 +188,68 @@
             $('#b_' + i).val(maxValue);
         }
 
-        function filter() {
-            var year1 = $('#year1').val();
-            var year2 = $('#year2').val();
-            var subCategoryID = @Model.SubCategoryID;
-            @*var filterValues = {};
-            for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
-                var key = $('#name_' + i).val();
-                var min = $('#a_' + i).val();
-                var max = $('#b_' + i).val();
-                filterValues[key] =  min+'-'+max;
-            }*@
-            var techSpecFilters = [];
-            var filterValueStrings = [];
+    function filter() {
+        var year1 = $('#year1').val();
+        var year2 = $('#year2').val();
+        var subCategoryID = @Model.SubCategoryID;
+        @*var filterValues = {};
+        for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
+            var key = $('#name_' + i).val();
+            var min = $('#a_' + i).val();
+            var max = $('#b_' + i).val();
+            filterValues[key] =  min+'-'+max;
+        }*@
+        //var techSpecFilters = [];
+        var attributeIDs = [];
+        var filterValueStrings = [];
 
-            for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
-                try {
-                    var techSpecFilter = JSON.parse($('#name_' + i).val()); // Convert string representation to JS object
+        for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
+            //try {
+            //    var techSpecFilter = JSON.parse($('#name_' + i).val()); // Convert string representation to JS object
 
-                } catch (error) {
-                    console.error("Failed to parse JSON:", $('#name_' + i).val(), error);
-                }
-                var valueString = $('#a_' + i).val() + '-' + $('#b_' + i).val();
-
-                techSpecFilters.push(techSpecFilter);
-                filterValueStrings.push(valueString);
-            }
-            $.ajax({
-                url: '@Url.Action("FilterProducts", "SearchResult")',
-                type: 'POST',
-                data: JSON.stringify({
-                    year1: year1, year2: year2,
-                    //filterValues: filterValues,
-                    techSpecFilters: techSpecFilters,
-                    filterValueStrings: filterValueStrings,
-                    subCategoryID: subCategoryID
-                }),
-                contentType: 'application/json',  // You're sending JSON data
-                dataType: 'html',
-                success: function (data) {
-                    $('#product-list').html(data);
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", status, error);
-                }
-            });
+            //} catch (error) {
+            //    console.error("Failed to parse JSON:", $('#name_' + i).val(), error);
+            //}
+            var attributeID = $('#name_' + i).val();
+            var valueString = $('#a_' + i).val() + '-' + $('#b_' + i).val();
+            attributeIDs.push(attributeID);
+            //techSpecFilters.push(techSpecFilter);
+            filterValueStrings.push(valueString);
         }
+        $.ajax({
+            url: '@Url.Action("FilterProducts", "SearchResult")',
+            type: 'POST',
+            data: JSON.stringify({
+                year1: year1, year2: year2,
+                //filterValues: filterValues,
+                //techSpecFilters: techSpecFilters,
+                attributeIDs: attributeIDs,
+                filterValueStrings: filterValueStrings,
+                subCategoryID: subCategoryID
+            }),
+            contentType: 'application/json',  // You're sending JSON data
+            dataType: 'html',
+            success: function (data) {
+                $('#product-list').html(data);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+            }
+        });
+    }
 
+    function reset() {
+        $('#year1').val('');
+        $('#year2').val('');
+        for (var i = 0; i < @Model.techSpecFilters.Count; i++) {
+            var minValue = parseInt($("#slider-range_" + i).data('min'));
+            var maxValue = parseInt($("#slider-range_" + i).data('max'));
+            $('#a_' + i).val(minValue);
+            $('#b_' + i).val(maxValue);
+            $("#slider-range_" + i).slider("values", 0, minValue);
+            $("#slider-range_" + i).slider("values", 1, maxValue);
+        }
+        filter();
+    }
 
 </script>

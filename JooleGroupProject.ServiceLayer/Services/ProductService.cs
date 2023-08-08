@@ -58,7 +58,15 @@ namespace JooleGroupProject.ServiceLayer.Services
         public int GetTechSpecValueForProduct(int productID, int attributeID)
         {
             var productAttribute = _unitOfWork.ProductAttributeRepo.Get(pa => pa.ProductID == productID && pa.AttributeID == attributeID);
-            return int.Parse(productAttribute.AttributeValue);
+            if (productAttribute == null)
+            {
+                Console.WriteLine($"ProductAttribute not found for ProductID: {productID}, AttributeID: {attributeID}");
+               
+            }
+            var attributeValue = int.Parse(productAttribute.AttributeValue);
+            Console.WriteLine($"AttributeValue for ProductID: {productID}, AttributeID: {attributeID} is {attributeValue}");
+
+            return attributeValue;
         }
     }
     

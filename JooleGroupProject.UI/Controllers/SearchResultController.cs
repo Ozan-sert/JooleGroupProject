@@ -1,4 +1,5 @@
-﻿using JooleGroupProject.ServiceLayer.Interfaces;
+﻿using Antlr.Runtime.Tree;
+using JooleGroupProject.ServiceLayer.Interfaces;
 using JooleGroupProject.ServiceLayer.Models;
 using JooleGroupProject.ServiceLayer.Services;
 using JooleGroupProject.UI.Models;
@@ -31,24 +32,25 @@ namespace JooleGroupProject.UI.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult FilterProducts(string year1, string year2, List<TechSpecFilterDTO> techSpecFilters, List<string> filterValueStrings, int subCategoryID)
+        public ActionResult FilterProducts(string year1, string year2, List<int> attributeIDs, List<string> filterValueStrings, int subCategoryID)
         {
             int y1 = (year1 == ""||year1 == "0") ? 1900: int.Parse(year1);
             int y2 = (year2 == "" || year2 == "0") ? 2023 : int.Parse(year2);
             int subID = subCategoryID;
             IEnumerable<ProductDTO> products = resultService.GetProductsFiltered(subID, y1, y2);
-            for(int i = 0; i < techSpecFilters.Count;i++)
+            
+            for(int i = 0; i < attributeIDs.Count;i++)
             {
-                TechSpecFilterDTO techSpecFilterDTO = techSpecFilters[i];
-                int attributeID = techSpecFilterDTO.AttributeID;
+                int attributeID = attributeIDs[i];
                 var values = filterValueStrings[i].Split('-');
                 int min = int.Parse(values[0]);
                 int max = int.Parse(values[1]);
                 products = products.Where(p =>
                 {
                     int attributeValue = productService.GetTechSpecValueForProduct(p.ProductID, attributeID);
+
                     return attributeValue >= min && attributeValue <= max;
-                });
+                }).ToList();
             }
 
 
