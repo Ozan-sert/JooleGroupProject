@@ -1,0 +1,27 @@
+﻿.summary-container{
+    width:70%;
+    margin:0 auto;
+}
+
+.title {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.attribute-name {
+    background-color: #dddddd;
+
+}
+.attribute-value {
+    border-bottom: 1px solid #dddddd;
+}
+.attributelist div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.attributelist.row {
+    margin-left: 0;
+    margin-right: 0;
+}

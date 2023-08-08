@@ -1,0 +1,122 @@
+﻿@model JooleGroupProject.ServiceLayer.Models.ProductDTO
+
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+@{ 
+    Layout = null;
+}
+<hear>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/productDetail.css" rel="stylesheet" />
+</hear>
+
+<div>header</div>
+<div class="row summary-container">
+    <div class="col-12"><h2 style="color: #4773b2; ">Product Summary</h2></div>
+    <div class="row">
+        <div class="col-6">
+            <div class="title">
+                DESCRIPTION
+            </div>
+            <div class="attributelist row">
+                <div class="col-6 attribute-name">
+                    <strong>Manufacturer</strong>
+                </div>
+                <div class="col-6 attribute-value">
+                    @Model.Manufacturer
+                </div>
+                <div class="col-6 attribute-name">
+                    <strong>Series</strong>
+                </div>
+                <div class="col-6 attribute-value">
+                    @Model.Series
+                </div>
+                <div class="col-6 attribute-name">
+                    <strong>Model</strong>
+                </div>
+                <div class="col-6 attribute-value">
+                    @Model.Model
+                </div>
+            </div>
+            <div class="title mt-4">
+                TYPE
+            </div>
+            @foreach (var attribute in Model.Attributes)
+            {
+                if (attribute.IsType == true)
+                {
+                    <div class="attributelist row">
+                        <div class="col-6 attribute-name">
+                            <strong>@attribute.AttributeName</strong>
+                        </div>
+                        <div class="col-6 attribute-value">
+                            @attribute.AttributeValue
+                        </div>
+                    </div>
+                }
+            }
+            <div class="attributelist row">
+                <div class="col-6 attribute-name">
+                    <strong>Model Year</strong>
+                </div>
+                <div class="col-6 attribute-value">
+                    @Model.ModelYear
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="title">
+                TECHNICAL SPECIFICATIONS
+            </div>
+            @foreach (var attribute in Model.Attributes)
+            {
+                bool processed = false;
+
+                if (attribute.IsTechSpec && attribute.AttributeName.EndsWith("_Min"))
+                {
+                    var maxAttributeName = attribute.AttributeName.Replace("_Min", "_Max");
+                    var maxAttribute = Model.Attributes.FirstOrDefault(a => a.AttributeName == maxAttributeName);
+
+                    if (maxAttribute != null)
+                    {
+                        <div class="attributelist row">
+                            <div class="col-6 attribute-name">
+                                <strong>@attribute.AttributeName.Replace("_Min", "")</strong>
+                            </div>
+                            <div class="col-6 row py-0">
+                                <div class="col-3 attribute-name ">
+                                    <strong>Min</strong>
+                                </div>
+                                <div class="col-3 attribute-value ">
+                                    @attribute.AttributeValue
+                                </div>
+                                <div class="col-3 attribute-name ">
+                                    <strong>Max</strong>
+                                </div>
+                                <div class="col-3 attribute-value ">
+                                    @maxAttribute.AttributeValue
+                                </div>
+                            </div>
+                        </div>
+
+                        processed = true;
+                    }
+                }
+
+                if (!processed && attribute.IsTechSpec && !attribute.AttributeName.EndsWith("_Max"))
+                {
+                    <div class="attributelist row">
+                        <div class="col-6 attribute-name">
+                            <strong>@attribute.AttributeName</strong>
+                        </div>
+                        <div class="col-6 attribute-value">
+                            @attribute.AttributeValue
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

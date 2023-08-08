@@ -4,7 +4,7 @@
 {
     <div class="product-card col-3 text-center ">
         <div class="product mx-2 ">
-            <div class="clickable link-to-detail"  data-url="@Url.Action("Detail", "Product", new { id = product.ProductID,subCategoryId= product.SubCategoryID })">
+            <div class="clickable link-to-detail"  data-url="@Url.Action("Detail", "Product", new { id = product.ProductID })">
                 <div class="product-img">
                     <img id="pimg_@product.ProductID" alt="@product.ProductName" src="~/Content/images/pimg_@(product.ProductID).jpg" />
                 </div>

@@ -29,6 +29,7 @@ namespace JooleGroupProject.UI.Controllers
             viewModel.SubCategoryName = subCategoryName;
             viewModel.SubCategoryID = subCategoryID;
             viewModel.Products = resultService.GetProductsBySubCategory(subCategoryID);
+            Session["products"] = viewModel.Products;
             return View(viewModel);
         }
         [HttpPost]
@@ -37,8 +38,15 @@ namespace JooleGroupProject.UI.Controllers
             int y1 = (year1 == ""||year1 == "0") ? 1900: int.Parse(year1);
             int y2 = (year2 == "" || year2 == "0") ? 2023 : int.Parse(year2);
             int subID = subCategoryID;
-            IEnumerable<ProductDTO> products = resultService.GetProductsFiltered(subID, y1, y2);
-            
+            //IEnumerable<ProductDTO> products = resultService.GetProductsFiltered(subID, y1, y2);
+            IEnumerable<ProductDTO> products = Session["products"] as IEnumerable<ProductDTO>;
+            if(products ==null)
+            {
+                products = resultService.GetProductsFiltered(subID, y1, y2);
+            } else
+            {
+                products = products.Where(p => p.ModelYear >= y1 && p.ModelYear <= y2).ToList();
+            }
             for(int i = 0; i < attributeIDs.Count;i++)
             {
                 int attributeID = attributeIDs[i];
