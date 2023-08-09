@@ -8,15 +8,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace JooleGroupProject.UI.Controllers
 {
     public class SearchController : Controller
     {
         SearchService searchService = new SearchService();
-        SearchViewModel searchViewModel = new SearchViewModel();
+        //SearchViewModel searchViewModel = new SearchViewModel();
 
         //public SearchController() {
         //    this.searchViewModel = new SearchViewModel()
@@ -31,7 +33,7 @@ namespace JooleGroupProject.UI.Controllers
         // GET: Search
         public ActionResult Index()
         {
-            this.searchViewModel = new SearchViewModel()
+            SearchViewModel searchViewModel = new SearchViewModel()
             {
                 selectedCategoryID = 1,
                 selectedCategoryName = "Mechanical",
@@ -47,7 +49,7 @@ namespace JooleGroupProject.UI.Controllers
             int categoryID = int.Parse(data);
             string categoryName = searchService.GetCategoryNameByID(categoryID);
 
-            searchViewModel = new SearchViewModel()
+            SearchViewModel searchViewModel = new SearchViewModel()
             {
                 selectedCategoryID = categoryID,
                 selectedCategoryName = categoryName,
@@ -70,24 +72,40 @@ namespace JooleGroupProject.UI.Controllers
         [HttpPost]
         public ActionResult toResult(string data) {
             var selectedSubCategory = searchService.GetSubCategoryByName(data);
+            SearchViewModel searchViewModel = new SearchViewModel() {
+                selectedSubCategoryName = data,
+                selectedSubCategoryID = selectedSubCategory.SubCategoryID,
+                selectedCategoryID = selectedSubCategory.CategoryID,
+                Categories = searchService.GetCategories(), 
+                SubCategories = searchService.GetSubsforCategory(selectedSubCategory.CategoryID),
+            };
 
-            searchViewModel.selectedSubCategoryName = data;
-            searchViewModel.selectedSubCategoryID = selectedSubCategory.SubCategoryID;
-
-            string result = "ProductResult?subCategoryID=" + searchViewModel.selectedSubCategoryID + "&categoryName=1" + "&subCategoryName=" + searchViewModel.selectedSubCategoryName;
+            //string result = "/Search/ProductResult?subCategoryID=" + searchViewModel.selectedSubCategoryID + "&categoryName=1" + "&subCategoryName=" + searchViewModel.selectedSubCategoryName;
             
-            return Json(result); 
+            return Json(searchViewModel); 
 
         }
 
-        public ActionResult ProductResult(string subCategoryID, string categoryName, string subCategoryName) {
-            SearchViewModel model = new SearchViewModel()
+       
+        public ActionResult ProductResult(string result) {
+            if (!string.IsNullOrEmpty(result))
             {
-                selectedCategoryName = categoryName, 
-                selectedSubCategoryID = int.Parse(subCategoryID), 
-                selectedSubCategoryName = subCategoryName, 
-            }; 
-            return View("ProductResult", model); 
+                // Decode and deserialize the JSON data
+                // decodedData = HttpUtility.UrlDecode(data);
+                var serializer = new JavaScriptSerializer();
+                var myObject = serializer.Deserialize<SearchViewModel>(result);
+
+                return View("ProductResult", myObject);
+                // Now you can work with the myObject as needed
+
+                // For example:
+            }
+            //{
+            //    selectedCategoryName = categoryName, 
+            //    selectedSubCategoryID = int.Parse(subCategoryID), 
+            //    selectedSubCategoryName = subCategoryName, 
+            //}; 
+            return View("Index"); 
         }
 
     }

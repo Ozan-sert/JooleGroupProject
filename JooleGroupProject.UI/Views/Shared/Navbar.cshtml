@@ -1,0 +1,171 @@
+﻿@model JooleGroupProject.UI.Models.SearchViewModel
+
+@{
+    Layout = null;
+}
+
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        background-image: linear-gradient(#28709F, #F8F9FB);
+        height: 100px;
+        padding: 0.5%;
+        text-align: center;
+    }
+
+    .image {
+        display: inline-block;
+        height: 90%;
+        width: auto;
+    }
+
+    .profile {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #808080;
+        border-radius: 50%;
+        height: 90%;
+        aspect-ratio: 1/1;
+    }
+
+    form {
+        display: flex;
+        justify-content: flex-start; 
+        align-items: center;
+        height: 30%;
+        width: 40%;
+        margin-top: 3%;
+    }
+
+    select {
+        background-color: #1F71A7;
+        height: 95%;
+        border-radius: 5%;
+        padding: 5px;
+        font-size: 18%;
+        border: 1px solid white;
+        outline: none;
+    }
+
+    .searchBox {
+        height: 95%;
+        border-radius: 5%;
+        width: 60%;
+        font-size: 18%;
+        border: 1px solid #1F71A7;
+        outline: none;
+    }
+
+    .searchButton {
+        background-color: #1F71A7;
+        height: 95%;
+        border-radius: 10%;
+        border: 1px solid white;
+        outline: none;
+    }
+</style>
+
+<div class="navbar">
+    <img src="~/Content/Resources/joole-logo.png" class="image" />
+    <form>
+        <select id="categorySelector">
+            @foreach (var category in @Model.Categories)
+            {
+                <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
+            }
+        </select>
+
+        <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
+
+        <button id="search" class="searchButton" type="button">
+            <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+        </button>
+
+    </form>
+    <img class="profile" />
+</div>
+
+<script src="https://kit.fontawesome.com/5e8dc3bf55.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var selectedOption = $("#categorySelector").val();
+        axios.post("/Search/selectCategory", { data: selectedOption })
+            .then(function (response) {
+                console.log("success");
+
+                var autocompleteSource = response.data.tags;
+
+                console.log("data: " + response.data.tags);
+
+                $("#subcategorySelector").autocomplete({
+                    source: autocompleteSource
+                });
+            })
+            .catch(function (error) {
+                console.log("Error:", error);
+            });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#categorySelector").on("change", function () {
+            var selectedOption = $(this).val();
+            updateAutocompleteSource(selectedOption);
+        });
+    });
+
+    function updateAutocompleteSource(selectedOption) {
+        axios.post("/Search/selectCategory", { data: selectedOption })
+            .then(function (response) {
+                console.log("success");
+
+                var autocompleteSource = response.data.tags;
+
+                console.log("data: " + response.data.tags);
+
+                $("#subcategorySelector").autocomplete({
+                    source: autocompleteSource
+                });
+            })
+            .catch(function (error) {
+                console.log("Error:", error);
+            });
+    }
+
+</script>
+
+<script>
+
+
+    document.getElementById("search").addEventListener("click", function () {
+        // category id
+        var selectedCategory = document.getElementById("categorySelector").value;
+        // subcategory name
+        var selectedSubCategory = document.getElementById("subcategorySelector").value;
+
+        console.log(selectedCategory);
+        console.log(selectedSubCategory);
+
+        axios.post("/Search/toResult", {
+
+            //categoryID: selectedCategory,
+            data: selectedSubCategory
+
+        })
+            .then(function (response) {
+                console.log(response.data);
+                var result = JSON.stringify(response.data);
+                window.location.href = "http://" + window.location.host + "/Search/ProductResult?result=" + result;
+            })
+            .catch(function (error) {
+                console.log("Error:", error);
+            })
+    })
+</script>

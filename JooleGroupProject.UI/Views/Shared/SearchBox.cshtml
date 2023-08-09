@@ -73,9 +73,12 @@
 <body>
     <form>
         <select id="categorySelector">
-            @foreach (var category in @Model.Categories)
+            @if (@Model != null)
             {
+                foreach (var category in @Model.Categories)
+                {
                 <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
+                }
             }
         </select>
 
@@ -88,21 +91,6 @@
     </form>
 
     <script>
-        //function handleSelect() {
-
-        //    var selectedValue = document.getElementById("categorySelector").value;
-
-        //    axios.post("/Search/selectCategory", {
-        //        data: selectedValue
-        //    })
-        //        .then(function (response) {
-        //            console.log("successfully search");
-        //            document.getElementById("searchBox").value = response.data;
-        //        })
-        //        .catch(function (error) {
-        //            console.error(error)
-        //        })
-        //}
         $(document).ready(function () {
             $("#categorySelector").on("change", function () {
                 var selectedOption = $(this).val();
@@ -136,7 +124,7 @@
         document.getElementById("search").addEventListener("click", function () {
             // category id
             var selectedCategory = document.getElementById("categorySelector").value;
-            //subcategory name
+            // subcategory name
             var selectedSubCategory = document.getElementById("subcategorySelector").value;
 
             console.log(selectedCategory); 
@@ -150,7 +138,8 @@
             })
                 .then(function (response) { 
                     console.log(response.data);
-                    window.location.href = response.data; 
+                    var result = JSON.stringify(response.data); 
+                    window.location.href = "http://" + window.location.host + "/Search/ProductResult?result=" + result; 
                 })
                 .catch(function (error) {
                     console.log("Error:", error);
