@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model JooleGroupProject.UI.Models.SearchViewModel
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     <title>@ViewBag.Title</title>
     <style>
         .head {
@@ -35,14 +35,14 @@
         }
     </style>
 </head>
-<body> 
-    <nav class="head">
+<body>
+    <div class="head">
         <img src="~/Content/Resources/joole-logo.png" class="logo" />
         <div class="searchbox">
-
+            @Html.Partial("SearchBox", Model)
         </div>
         <img class="profile" />
-    </nav>
+    </div>
     <div class="container body-content">
         @RenderBody()
     </div>

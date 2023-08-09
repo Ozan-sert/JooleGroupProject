@@ -44,9 +44,9 @@
             color: white;
         }
 
-            .login-button:active {
-                border: 2px solid white;
-            }
+        .login-button:active {
+            border: 2px solid white;
+        }
 
         .signup-link {
             text-decoration: none;
@@ -54,9 +54,9 @@
             color: black;
         }
 
-            .signup-link:active {
-                color: white;
-            }
+        .signup-link:active {
+            color: white;
+        }
 
         .error {
             width: 50%;
@@ -71,7 +71,7 @@
     <div class="container">
         @Html.ActionLink("Sign Up", "Signup", "User", new { area = "" }, new { @class = "signup-link" })
 
-        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center">
+        <div style="width: 60%; margin: 0 20% 0 20%; text-align: center; margin-top: 10%">
             <img src="~/Content/Resources/joole-logo.png" style="width: 50%" />
             <p style="font-size: 18px">Building Product Selection Platform</p>
             <form action="Index" method="post">

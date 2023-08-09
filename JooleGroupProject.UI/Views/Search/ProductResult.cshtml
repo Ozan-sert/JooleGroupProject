@@ -1,10 +1,23 @@
 ﻿@model JooleGroupProject.UI.Models.SearchViewModel
 
 @{
-    ViewBag.Title = "ProductResult";
-    Layout = "~/Views/Shared/ProductLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ProductResult</h2>
+<!DOCTYPE html>
 
-<h1>@Model.selectedSubCategoryName</h1>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductResult</title>
+</head>
+<body>
+    <div>
+        <h2>ProductResult</h2>
+        <h2>@Model.selectedSubCategoryName</h2>
+        <h2>@Model.selectedSubCategoryID</h2>
+        <h2>@Model.selectedCategoryName</h2>
+    </div>
+</body>
+</html>
+

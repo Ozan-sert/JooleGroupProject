@@ -135,17 +135,22 @@
 
         document.getElementById("search").addEventListener("click", function () {
             // category id
-            //var selectedCategory = document.getElementById("categorySelector").value;
+            var selectedCategory = document.getElementById("categorySelector").value;
             //subcategory name
             var selectedSubCategory = document.getElementById("subcategorySelector").value;
 
+            console.log(selectedCategory); 
             console.log(selectedSubCategory); 
 
             axios.post("/Search/toResult", {
-                data: selectedSubCategory
+                
+                //categoryID: selectedCategory, 
+                data: selectedSubCategory 
+                
             })
-                .then(function (response) {
+                .then(function (response) { 
                     console.log(response.data);
+                    window.location.href = response.data; 
                 })
                 .catch(function (error) {
                     console.log("Error:", error);
