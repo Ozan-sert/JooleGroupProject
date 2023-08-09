@@ -200,6 +200,9 @@
     <Content Include="Views\Shared\SearchBox.cshtml" />
     <Content Include="Views\Shared\ProductLayout.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\SearchError.cshtml" />
+    <Content Include="Views\Search\ProductResult.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

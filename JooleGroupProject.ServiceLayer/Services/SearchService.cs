@@ -35,7 +35,7 @@ namespace JooleGroupProject.ServiceLayer.Services
         public List<CategoryDTO> GetCategories()
         {
             var categories = _unitOfWork.CategoryRepo.GetAll().ToList();
-            return _mapper.Map<List<CategoryDTO>>(categories);
+                return _mapper.Map<List<CategoryDTO>>(categories);
         }
 
 
@@ -43,6 +43,11 @@ namespace JooleGroupProject.ServiceLayer.Services
         {
             var subCategories = _unitOfWork.SubCategoryRepo.GetMany(x => x.CategoryID == id);
            return _mapper.Map<List<SubCategoryDTO>>(subCategories);
+        }
+
+        public string GetCategoryNameByID(int id) {
+            var category = _unitOfWork.CategoryRepo.GetByID(id);
+            return category.CategoryName; 
         }
     }
 }
