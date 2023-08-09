@@ -225,7 +225,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Models\ProductListVM.cs" />
     <Compile Include="Models\SearchResultVM.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
