@@ -8,6 +8,8 @@ namespace JooleGroupProject.UI.Models
 {
     public class ProductListVM
     {
+        public string SubCategoryName { get; set; }
+        public string CategoryName { get; set; }
         public int SubCategoryID { get; set; }
         public IEnumerable<ProductDTO> Products { get; set; }
     }

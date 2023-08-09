@@ -251,6 +251,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\compare.css" />
     <Content Include="Content\productDetail.css" />
     <Content Include="Content\Resources\joole-logo.png" />
     <Content Include="Content\images\pimg_1.jpg" />
@@ -308,6 +309,7 @@
     <Content Include="Views\SearchResult\ProductsFilteredByModelYear.cshtml" />
     <Content Include="Views\SearchResult\_ProductListPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\Compare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

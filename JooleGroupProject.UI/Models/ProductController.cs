@@ -24,5 +24,39 @@ namespace JooleGroupProject.UI.Models
             }
             return View(product);
         }
+
+        public ActionResult Compare(string productIds, string subcategoryName, string categoryName)
+        {
+            if (string.IsNullOrEmpty(productIds))
+            {
+                return HttpNotFound("No products to compare.");
+            }
+            string[] ids = productIds.Split(',');
+            ProductListVM viewModel = new ProductListVM();
+
+            List<ProductDTO> products = new List<ProductDTO>();
+            foreach(var id in ids)
+            {
+                int productID = int.Parse(id);
+                var product = Session["products"] as IEnumerable<ProductDTO>;
+                if(product == null)
+                {
+                    return HttpNotFound("Products not found in session.");
+                }
+                var prod = product.Where(p => p.ProductID == productID).FirstOrDefault();
+                if(prod == null)
+                {
+                    return HttpNotFound("Product not found.");
+                }
+                products.Add(prod);
+            }
+            viewModel.Products = products;
+            viewModel.CategoryName = categoryName;
+            viewModel.SubCategoryName = subcategoryName;
+            // get subcategory name
+
+            return View(viewModel);
+        }
+       
     }
 }

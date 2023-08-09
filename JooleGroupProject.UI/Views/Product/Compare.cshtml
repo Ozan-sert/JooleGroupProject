@@ -1,0 +1,155 @@
+﻿@model JooleGroupProject.UI.Models.ProductListVM
+
+@{
+    ViewBag.Title = "Compare";
+}
+@{ 
+    Layout = null;
+}
+<hear>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/compare.css" rel="stylesheet" />
+</hear>
+
+<div>haeder</div>
+<div class="row total-container">
+
+    <div class="col-12"><p style="color: #4a71a4 ">
+    @Model.CategoryName > @Model.SubCategoryName > Compare
+    </p>
+    </div>
+    <div class="row compare-container p-0 m-0">
+        <div class="col-3 attribute-col p-0">
+            <div class="wrap" style=" border: 1px solid #d8d8d8; ">
+
+                <div class="product-img m-0">
+                    
+                </div>
+            </div>
+            <div class="attribute" style="border-right:none;">
+                <strong>DESCRIPTION</strong>
+                
+            </div>
+            <div class="attribute">
+                <strong>
+                    Manufacture
+                </strong>
+            </div>
+            <div class="attribute">
+                <strong>
+                    Serries
+                </strong>
+            </div>
+            <div class="attribute">
+                <strong>
+                    Model
+                </strong>
+            </div>
+            <div class="attribute" style="border-right:none;">
+                <strong>
+                    TYPE
+                </strong>
+            </div>
+            @foreach(var attribute in Model.Products.FirstOrDefault().Attributes)
+            {
+                if(attribute.IsType == true)
+                {
+                    <div class="attribute">
+                        <strong>
+                            @attribute.AttributeName
+                        </strong>
+                    </div>
+                }
+            }
+        <div class="attribute" style="border-right:none;">
+            <strong>
+                TECHNICAL SPECIFICATIONS
+            </strong>
+        </div>
+            @foreach(var attribute in Model.Products.FirstOrDefault().Attributes)
+            {
+                if(attribute.IsTechSpec == true)
+                {
+                    <div class="attribute">
+                        <strong>
+                            @attribute.AttributeName
+                        </strong>
+                    </div>
+                }
+            }
+        </div>
+        @{ int i = 0;}
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-3 prodcut-col p-0 m-0">
+                <div class="wrap" style="border-top: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8; ">
+
+                    <div class="product-img m-0">
+                        <img src="~/Content/images/pimg_@(product.ProductID).jpg" />
+                    </div>
+                </div>
+                @{
+                    if (i == Model.Products.Count() - 1)
+                    {
+                        <div class="empty-box" style="border-right: 1px solid #d8d8d8"></div>
+                    }
+                    else
+                    {
+                        <div class="empty-box"></div>
+                    }
+                }
+                <div class="value">
+                    @product.Manufacturer
+                </div>
+                <div class="value">
+                    @product.Series
+                </div>
+                <div class="value">
+                    @product.Model
+                </div>
+                @{
+                    if (i == Model.Products.Count() - 1)
+                    {
+                        <div class="empty-box" style="border-right: 1px solid #d8d8d8"></div>
+                    }
+                    else
+                    {
+                        <div class="empty-box"></div>
+                    }
+                }
+                @foreach (var attribute in product.Attributes)
+                {
+                    if (attribute.IsType == true)
+                    {
+                        <div class="value">
+                            @attribute.AttributeValue
+                        </div>
+                    }
+                }
+                @{
+                    if (i == Model.Products.Count() - 1)
+                    {
+                        <div class="empty-box" style="border-right: 1px solid #d8d8d8"></div>
+                    }
+                    else
+                    {
+                        <div class="empty-box"></div>
+                    }
+                }
+                @foreach (var attribute in product.Attributes)
+                {
+                    if (attribute.IsTechSpec == true)
+                    {
+                        <div class="value">
+                            @attribute.AttributeValue
+                        </div>
+                    }
+                }
+                @{i++;
+                }
+            </div>
+          }
+    </div>
+           
+</div>
