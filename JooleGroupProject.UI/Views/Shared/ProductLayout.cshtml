@@ -3,45 +3,48 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <title>@ViewBag.Title</title>
     <style>
-        .header {
+        .head {
             width: 100%;
             height: 100px;
-            background-image: linear-gradient(#28709F, #F8F9FB); 
-            text-align: center; 
+            background-image: linear-gradient(#28709F, #F8F9FB);
+            text-align: center;
         }
+
         .logo {
-            display: inline-block; 
-            height: 90%; 
+            display: inline-block;
+            height: 90%;
             margin-left: -8%;
         }
+
         .searchbox {
-            display: inline-block; 
-            width: 75%; 
+            display: inline-block;
+            width: 75%;
         }
+
         .profile {
-            display: inline-block; 
-            margin-top: 10px; 
-            background-color: #808080; 
-            border-radius: 50%; 
-            width: 80px; 
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #808080;
+            border-radius: 50%;
+            width: 80px;
             height: 80px;
         }
     </style>
 </head>
 <body> 
-    <div>
-        <div class="header">
-            <img src="~/Content/Resources/joole-logo.png" class="logo" />
-            <div class="searchbox">
+    <nav class="head">
+        <img src="~/Content/Resources/joole-logo.png" class="logo" />
+        <div class="searchbox">
 
-            </div>
-            <img class="profile" />
         </div>
-        <div>
-            @RenderBody()
-        </div>
+        <img class="profile" />
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
     </div>
 </body>
 </html>

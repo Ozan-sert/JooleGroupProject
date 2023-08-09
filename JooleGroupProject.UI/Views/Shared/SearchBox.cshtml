@@ -10,54 +10,24 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-        $(function () {
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "BASIC",
-                "C",
-                "C++",
-                "Clojure",
-                "COBOL",
-                "ColdFusion",
-                "Erlang",
-                "Fortran",
-                "Groovy",
-                "Haskell",
-                "Java",
-                "JavaScript",
-                "Lisp",
-                "Perl",
-                "PHP",
-                "Python",
-                "Ruby",
-                "Scala",
-                "Scheme"
-            ];
-            $("#tags").autocomplete({
-                source: availableTags
-            });
+        $(document).ready(function () {
+            var selectedOption = $("#categorySelector").val();
+            axios.post("/Search/selectCategory", { data: selectedOption })
+                .then(function (response) {
+                    console.log("success");
+
+                    var autocompleteSource = response.data.tags;
+
+                    console.log("data: " + response.data.tags);
+
+                    $("#subcategorySelector").autocomplete({
+                        source: autocompleteSource
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error:", error);
+                });
         });
-    </script>
-
-    <script>
-        $( function() {
-            var tags = @Html.Raw(Json.Encode(@Model.SubCategories));
-            //tags = ["re", "ref", "refrig"];
-
-            var tagObjects = tags.map(function (tag) {
-                return {
-                    key: tag.SubCategoryID,
-                    label: tag.SubCategoryName
-                };
-            });
-
-            $("#subcategorySelector").autocomplete({
-                source: tagObjects,
-            });
-        })
-
     </script>
 
     <style>
@@ -101,47 +71,61 @@
 </head>
 
 <body>
-    <div id="searchBox">
-        <h1>@Model.selectedCategoryName</h1>
-        <form>
-            <select id="categorySelector" onchange="handleSelect()">
-                @foreach (var category in @Model.Categories)
-                {
-                    <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
-                }
-            </select>
+    <form>
+        <select id="categorySelector">
+            @foreach (var category in @Model.Categories)
+            {
+                <option value=@category.CategoryID style="background-color: white" selected=@Model.selectedCategoryID.Equals(@category.CategoryID)>@category.CategoryName</option>
+            }
+        </select>
 
-            <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
+        <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
 
-            <button id="search" class="searchButton">
-                <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
-            </button>
+        <button id="search" class="searchButton" type="button">
+            <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+        </button>
 
-        </form>
-
-        <div class="ui-widget">
-            <label for="tags">Tags: </label>
-            <input id="tags">
-        </div>
-
-    </div>
-
+    </form>
 
     <script>
-        function handleSelect() {
+        //function handleSelect() {
 
-            var selectedValue = document.getElementById("categorySelector").value;
+        //    var selectedValue = document.getElementById("categorySelector").value;
 
-            axios.post("/Search/selectCategory", {
-                data: selectedValue
-            })
-                .then(function (response) {
-                    console.log("successfully search");
-                    document.getElementById("searchBox").innerHTML = response.data; 
+        //    axios.post("/Search/selectCategory", {
+        //        data: selectedValue
+        //    })
+        //        .then(function (response) {
+        //            console.log("successfully search");
+        //            document.getElementById("searchBox").value = response.data;
+        //        })
+        //        .catch(function (error) {
+        //            console.error(error)
+        //        })
+        //}
+        $(document).ready(function () {
+            $("#categorySelector").on("change", function () {
+                var selectedOption = $(this).val();
+                updateAutocompleteSource(selectedOption);
+            });
+        });
+
+        function updateAutocompleteSource(selectedOption) {
+            axios.post("/Search/selectCategory", { data: selectedOption })
+                .then(function (response) { 
+                    console.log("success"); 
+
+                    var autocompleteSource = response.data.tags; 
+
+                    console.log("data: " + response.data.tags); 
+                    
+                    $("#subcategorySelector").autocomplete({
+                        source: autocompleteSource
+                    });
                 })
                 .catch(function (error) {
-                    console.error(error)
-                })
+                    console.log("Error:", error);
+                });
         }
 
     </script>
@@ -150,20 +134,22 @@
 
 
         document.getElementById("search").addEventListener("click", function () {
-            //// category id
+            // category id
             //var selectedCategory = document.getElementById("categorySelector").value;
-            ////subcategory name
-            //var selectedSubCategory = document.getElementById("subcategorySelector").value;
+            //subcategory name
+            var selectedSubCategory = document.getElementById("subcategorySelector").value;
 
-            //axios.post("/Search/toResult", {
-            //    data: selectedValue.SubCategoryID + "," + selectedValue.SubCategoryName
-            //})
-            //    .then(function (response) {
-            //        console.log(response.data);
-            //    })
-            //    .catch(function (error) {
-            //        console.error(error)
-            //    })
+            console.log(selectedSubCategory); 
+
+            axios.post("/Search/toResult", {
+                data: selectedSubCategory
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log("Error:", error);
+                })
         })
     </script>
 </body>

@@ -13,7 +13,7 @@ namespace JooleGroupProject.UI.Models
 
         public string selectedCategoryName;
 
-        public int selectedSubCatgoryID;
+        public int selectedSubCategoryID;
 
         public string selectedSubCategoryName; 
 

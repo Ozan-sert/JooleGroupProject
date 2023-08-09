@@ -49,5 +49,10 @@ namespace JooleGroupProject.ServiceLayer.Services
             var category = _unitOfWork.CategoryRepo.GetByID(id);
             return category.CategoryName; 
         }
+
+        public SubCategoryDTO GetSubCategoryByName(string name) { 
+            SubCategory subcategory = _unitOfWork.SubCategoryRepo.GetSubCategoryByName(name);
+            return  _mapper.Map <SubCategoryDTO> (subcategory);
+        }
     }
 }

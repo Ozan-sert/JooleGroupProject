@@ -40,38 +40,38 @@ namespace JooleGroupProject.UI.Controllers
             int categoryID = int.Parse(data);
             string categoryName = searchService.GetCategoryNameByID(categoryID);
 
-            this.searchViewModel = new SearchViewModel() {
-                selectedCategoryID = categoryID, 
-                selectedCategoryName = categoryName, 
+            this.searchViewModel = new SearchViewModel()
+            {
+                selectedCategoryID = categoryID,
+                selectedCategoryName = categoryName,
                 Categories = searchService.GetCategories(),
                 SubCategories = searchService.GetSubsforCategory(categoryID)
             };
+
+            var subs = searchService.GetSubsforCategory(categoryID);
+            string[] tags = new string[subs.Count];
+
+            for (int i = 0; i < subs.Count; i++)
+            {
+                tags[i] = subs[i].SubCategoryName; 
+            }
+
             //Response.Cache.SetNoStore(); 
-            return View("Index", this.searchViewModel);
+            return Json(new { tags });
         }
 
         [HttpPost]
         public ActionResult toResult(string data) {
-            /*
-            string[] myData = data.Split(',');
-            SubCategoryDTO subCategory = new SubCategoryDTO();
+            var selectedSubCategory = searchService.GetSubCategoryByName(data);
 
-            subCategory.CategoryID = searchViewModel.selectedCategory.CategoryID;
-            subCategory.SubCategoryID = int.Parse(myData[0]);
-            subCategory.SubCategoryName = data[1].ToString();
-
-            searchViewModel.selectedSubCategory = subCategory;
-
-            if (subCategory == null)
-            {
-                return View("SearchError");
+            if (selectedSubCategory == null) {
+                return View("SearchError"); 
             }
-            else {
-                return View("ProductResult", searchViewModel); 
-            }
-            */
 
-            return View("SearchError"); 
+            searchViewModel.selectedSubCategoryName = data;
+            searchViewModel.selectedSubCategoryID = selectedSubCategory.SubCategoryID; 
+
+            return View("ProductResult", searchViewModel); 
 
         }
 
