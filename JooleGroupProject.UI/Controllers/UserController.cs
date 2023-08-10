@@ -10,11 +10,17 @@ using AutoMapper;
 
 namespace JooleGroupProject.UI.Controllers
 {
+
     public class UserController : Controller
     {
         UserService myService = new UserService();
 
         private readonly IMapper _mapper;
+
+        //private string LoginSuccess = "User logins successfully!";
+        //private string LoginFailName = "User fails to login because user name doesn't exist.";
+        //private string LoginFailPwd = "User fails to login because user password is incorrect.";
+        private string LoginFail = "User fails to login, user name or user password is incorrect.";
 
         public UserController() {
             var config = new MapperConfiguration(cfg =>
@@ -22,12 +28,13 @@ namespace JooleGroupProject.UI.Controllers
                 cfg.CreateMap<RegisterViewModel, UserDTO>()
                     .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password)); // Mapping Password
             });
-            _mapper = config.CreateMapper(); 
+            _mapper = config.CreateMapper();
         }
 
         // GET: User
         public ActionResult Login()
         {
+            ViewBag.LoginError = false;
             return View();
         }
 
@@ -41,6 +48,8 @@ namespace JooleGroupProject.UI.Controllers
 
                 if (user == null)
                 {
+                    ViewBag.LoginError = true;
+                    ViewBag.LoginMessage = LoginFail;  
                     // If login is not successful, redirect to a different action or view
                     // For example, you can redirect to a "LoginFailed" action or view
                     return View();
@@ -50,6 +59,8 @@ namespace JooleGroupProject.UI.Controllers
                 return RedirectToAction("Index", "Search"); // Redirect to Search/Index
             }
 
+            ViewBag.LoginError = true;
+            ViewBag.LoginMessage = LoginFail;
             return View();
         }
 

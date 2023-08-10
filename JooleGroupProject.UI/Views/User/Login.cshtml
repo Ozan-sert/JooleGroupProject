@@ -89,6 +89,11 @@
             <div class="error">
                 @Html.ValidationSummary()
             </div>
+            @if(ViewBag.LoginError) { 
+                <div class="error">
+                    @ViewBag.LoginMessage
+                </div>
+            }
         </form>
     </div>
 </div>
