@@ -11,7 +11,10 @@
 </head>
 
 <div class="row summary-container">
-    <div class="col-12"><h2 style="color: #4773b2; ">Product Summary</h2></div>
+    <div class="col-12 d-flex justify-content-between"><h2 style="color: #4773b2; ">Product Summary</h2>
+    <div class="mx-4 my-2">
+    <button onclick="goBack()">Back</button>
+</div></div>
     <div class="row">
         <div class="col-6">
             <div class="title">
@@ -117,3 +120,8 @@
         </div>
     </div>
 </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

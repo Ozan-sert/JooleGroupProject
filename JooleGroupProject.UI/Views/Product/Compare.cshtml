@@ -11,9 +11,12 @@
 
 <div class="row total-container">
 
-    <div class="col-12"><p style="color: #4a71a4 ">
+    <div class="col-12 d-flex justify-content-between" ><p style="color: #4a71a4 ">
     @Model.CategoryName > @Model.SubCategoryName > Compare
     </p>
+        <div>
+            <button onclick="goBack()">Back</button>
+        </div>
     </div>
     <div class="row compare-container p-0 m-0">
         <div class="col-3 attribute-col p-0">
@@ -150,3 +153,8 @@
     </div>
            
 </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

@@ -31,7 +31,7 @@ namespace JooleGroupProject.UI.Controllers
             }
             SearchResultVM viewModel = new SearchResultVM();
             var categories = Session["categories"] as IEnumerable<CategoryDTO>;
-
+            
             if (categories == null)
             {
                 Session["categories"] = searchService.GetCategories();

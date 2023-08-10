@@ -13,6 +13,9 @@
     width: auto;
     margin-left: 2rem;
 }
+.image:hover {
+    cursor: pointer;
+}
 
 .profile {
     display: inline-block;
@@ -22,6 +25,9 @@
     height: 90%;
     aspect-ratio: 1/1;
     margin-right: 2rem;
+    cursor:pointer;
+    position:relative;
+    z-index:10;
 }
 
 form {
@@ -58,3 +64,27 @@ select {
     border: 1px solid white;
     outline: none;
 }
+
+
+
+.profile-menu {
+    display: none;
+     position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 10;
+}
+
+.profile-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profile-menu a:hover {
+    background-color: #f1f1f1;
+}
+

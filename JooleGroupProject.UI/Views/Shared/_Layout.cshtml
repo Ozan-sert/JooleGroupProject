@@ -14,24 +14,31 @@
 </head>
 <body  >
     <div class="navbar">
-        <img src="~/Content/Resources/joole-logo.png" class="image" />
-        <form>
-       
-                <select id="categorySelector" >
-                    @foreach (var category in (List<CategoryDTO>)Session["categories"])
-                    {
-                        <option value=@category.CategoryID style="background-color: white; font-size:100%;" @(category.CategoryID == 1 ? "selected" : "")>@category.CategoryName</option>
-                    }
-                </select>
-             
-                <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
+        <img src="~/Content/Resources/joole-logo.png" class="image" onclick="window.location.href='/Search/Index'" />
 
-                <button id="search" class="searchButton" type="button">
-                    <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
-                </button>
+
+        <form>
+
+            <select id="categorySelector">
+                @foreach (var category in (List<CategoryDTO>)Session["categories"])
+                {
+                    <option value=@category.CategoryID style="background-color: white; font-size:100%;" @(category.CategoryID == 1 ? "selected" : "")>@category.CategoryName</option>
+                }
+            </select>
+
+            <input id="subcategorySelector" type="text" placeholder="Search" class="searchBox" />
+
+            <button id="search" class="searchButton" type="button">
+                <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
+            </button>
 
         </form>
-        <img class="profile" />
+            <img class="profile" onclick="toggleMenu()" />
+            <div id="profileMenu" class="profile-menu">
+                <a href="#" onclick="signOut()">Sign Out</a>
+            </div>
+
+      
     </div>
     <div class="container body-content"style="margin-top:2%">
         @RenderBody()
@@ -86,6 +93,18 @@
             window.location.href = destinationURL;
 
         })
+        function toggleMenu() {
+            var menu = document.getElementById("profileMenu");
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function signOut() {
+            window.location.href = '/';
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>
